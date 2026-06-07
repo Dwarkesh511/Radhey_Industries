@@ -1,0 +1,499 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'Poppins', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+
+  --color-background: rgb(var(--background) / 1);
+  --color-foreground: rgb(var(--foreground) / 1);
+  --color-card: rgb(var(--card) / 1);
+  --color-card-foreground: rgb(var(--card-foreground) / 1);
+  --color-popover: rgb(var(--popover) / 1);
+  --color-popover-foreground: rgb(var(--popover-foreground) / 1);
+  --color-primary: rgb(var(--primary) / 1);
+  --color-primary-foreground: rgb(var(--primary-foreground) / 1);
+  --color-secondary: rgb(var(--secondary) / 1);
+  --color-secondary-foreground: rgb(var(--secondary-foreground) / 1);
+  --color-muted: rgb(var(--muted) / 1);
+  --color-muted-foreground: rgb(var(--muted-foreground) / 1);
+  --color-accent: rgb(var(--accent) / 1);
+  --color-accent-foreground: rgb(var(--accent-foreground) / 1);
+  --color-destructive: rgb(var(--destructive) / 1);
+  --color-destructive-foreground: rgb(var(--destructive-foreground) / 1);
+  --color-border: rgb(var(--border) / 0.12);
+  --color-input: rgb(var(--input) / 0.08);
+  --color-ring: rgb(var(--ring) / 1);
+}
+
+/* =============================================
+   RADHEY INDUSTRIES — BRAND COLOR SYSTEM
+   Primary: #3F3D99 (Royal Blue)
+   Accent:  #ED3237 (Red — 20% use only)
+   ============================================= */
+:root {
+  /* Brand Colors */
+  --brand-primary: #3F3D99;
+  --brand-primary-dark: #2D2B7A;
+  --brand-primary-light: #5856C2;
+  --brand-primary-xlight: #E8E8F5;
+  --brand-accent: #ED3237;
+  --brand-accent-dark: #C62828;
+
+  /* Backgrounds — light, clean, corporate */
+  --gt-bg-primary: #F8FAFC;
+  --gt-bg-secondary: #FFFFFF;
+  --gt-bg-tertiary: #F1F5F9;
+
+  /* Text */
+  --gt-text-primary: #1F2937;
+  --gt-text-secondary: #4B5563;
+  --gt-text-muted: #6B7280;
+
+  /* Borders / Dividers */
+  --gt-border: rgba(63, 61, 153, 0.12);
+  --gt-border-solid: #D1D5DB;
+
+  /* Cards */
+  --gt-card-bg: #FFFFFF;
+  --gt-card-border: rgba(63, 61, 153, 0.10);
+  --gt-card-hover-border: rgba(237, 50, 55, 0.35);
+  --gt-card-shadow: 0 2px 16px rgba(63, 61, 153, 0.07);
+  --gt-card-hover-shadow: 0 8px 32px rgba(63, 61, 153, 0.14);
+
+  /* Inputs */
+  --gt-input-bg: #FFFFFF;
+  --gt-input-border: #D1D5DB;
+
+  /* Navbar */
+  --gt-nav-bg: rgba(255, 255, 255, 0.95);
+
+  /* Footer */
+  --gt-footer-bg: #1E1E4F;
+  --gt-footer-border: rgba(255, 255, 255, 0.08);
+
+  /* Section Alt */
+  --gt-section-alt: #F1F5F9;
+
+  /* Grid / decoration */
+  --gt-grid-line: rgba(63, 61, 153, 0.04);
+  --gt-orb-opacity: 0.10;
+
+  /* Toggle */
+  --gt-toggle-bg: rgba(63, 61, 153, 0.08);
+  --gt-toggle-border: rgba(63, 61, 153, 0.15);
+
+  /* Tailwind token bridge */
+  --background: 248 250 252;
+  --foreground: 31 41 55;
+  --card: 255 255 255;
+  --card-foreground: 31 41 55;
+  --popover: 255 255 255;
+  --popover-foreground: 31 41 55;
+  --primary: 63 61 153;
+  --primary-foreground: 255 255 255;
+  --secondary: 241 245 249;
+  --secondary-foreground: 31 41 55;
+  --muted: 241 245 249;
+  --muted-foreground: 107 114 128;
+  --accent: 237 50 55;
+  --accent-foreground: 255 255 255;
+  --destructive: 237 50 55;
+  --destructive-foreground: 255 255 255;
+  --border: 63 61 153;
+  --input: 63 61 153;
+  --ring: 63 61 153;
+
+  color-scheme: light;
+}
+
+/* We no longer use a separate dark theme; the site is always light */
+/* Keep .light alias for any legacy class references */
+.light {
+  color-scheme: light;
+}
+
+/* =============================================
+   BASE
+   ============================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--gt-bg-primary);
+    color: var(--gt-text-primary);
+  }
+
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+    color: var(--brand-primary);
+  }
+}
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+.gt-bg-primary    { background-color: var(--gt-bg-primary); }
+.gt-bg-secondary  { background-color: var(--gt-bg-secondary); }
+.gt-bg-tertiary   { background-color: var(--gt-bg-tertiary); }
+.gt-text-primary  { color: var(--gt-text-primary); }
+.gt-text-secondary{ color: var(--gt-text-secondary); }
+.gt-text-muted    { color: var(--gt-text-muted); }
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.gt-nav-scrolled {
+  background-color: var(--gt-nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gt-border);
+  box-shadow: 0 2px 20px rgba(63, 61, 153, 0.08);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* =============================================
+   GRID BACKGROUND
+   ============================================= */
+.gt-grid-bg {
+  background-image:
+    linear-gradient(var(--gt-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gt-grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* =============================================
+   INPUTS
+   ============================================= */
+.gt-input {
+  background-color: var(--gt-input-bg);
+  border-color: var(--gt-input-border);
+  color: var(--gt-text-primary);
+}
+
+.gt-input::placeholder {
+  color: var(--gt-text-muted);
+}
+
+.gt-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(63, 61, 153, 0.12);
+}
+
+/* =============================================
+   THEME TOGGLE BUTTON
+   ============================================= */
+.theme-toggle {
+  background-color: var(--gt-toggle-bg);
+  border: 1px solid var(--gt-toggle-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--brand-primary);
+}
+
+.theme-toggle:hover {
+  background-color: var(--brand-primary-xlight);
+  border-color: rgba(63, 61, 153, 0.25);
+}
+
+/* =============================================
+   GLASS / SURFACE CARDS
+   ============================================= */
+.glass-card {
+  background: var(--gt-card-bg);
+  border: 1px solid var(--gt-card-border);
+  box-shadow: var(--gt-card-shadow);
+}
+
+.glass-card:hover {
+  border-color: var(--gt-card-hover-border);
+  box-shadow: var(--gt-card-hover-shadow);
+  transform: translateY(-3px);
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.btn-primary {
+  background-color: var(--brand-accent);
+  color: #FFFFFF;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(237, 50, 55, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-accent-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(237, 50, 55, 0.35);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--brand-primary);
+  border: 2px solid var(--brand-primary);
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  transform: translateY(-3px);
+}
+
+/* =============================================
+   SECTION LABEL (eyebrow)
+   ============================================= */
+.section-label {
+  color: var(--brand-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* =============================================
+   CARD HOVER ACCENT LINE (top border)
+   ============================================= */
+.card-accent-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--brand-accent);
+  border-radius: 8px 8px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-accent-top:hover::before {
+  opacity: 1;
+}
+
+/* =============================================
+   TEXT GRADIENT
+   ============================================= */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 79, 0.88) 0%,
+    rgba(63, 61, 153, 0.75) 50%,
+    rgba(45, 43, 122, 0.90) 100%
+  );
+}
+
+/* =============================================
+   MARQUEE / TICKER
+   ============================================= */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track-left {
+  animation: marquee-left 25s linear infinite;
+}
+
+.marquee-track-right {
+  animation: marquee-right 25s linear infinite;
+}
+
+.marquee-track-left:hover,
+.marquee-track-right:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee {
+  animation: marquee-left 20s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-right 20s linear infinite;
+}
+
+/* =============================================
+   PROCESS STEP CIRCLES
+   ============================================= */
+.process-step-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--brand-primary-xlight);
+  border: 2px solid var(--brand-primary);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* =============================================
+   FOOTER LINKS
+   ============================================= */
+.footer-link {
+  color: rgba(255, 255, 255, 0.70);
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+  display: block;
+}
+
+.footer-link:hover {
+  color: var(--brand-accent);
+}
+
+/* =============================================
+   SCROLL ANIMATIONS (handled via framer-motion)
+   Use these for CSS-only fallback
+   ============================================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes grid-move {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(60px); }
+}
+
+.animate-grid {
+  animation: grid-move 3s linear infinite;
+}
+
+/* =============================================
+   BADGE / PILL
+   ============================================= */
+.badge-primary {
+  background-color: var(--brand-primary-xlight);
+  color: var(--brand-primary);
+  border: 1px solid rgba(63, 61, 153, 0.20);
+  padding: 0.25rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge-accent {
+  background-color: rgba(237, 50, 55, 0.10);
+  color: var(--brand-accent);
+  border: 1px solid rgba(237, 50, 55, 0.20);
+  padding: 0.25rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =============================================
+   DIVIDER
+   ============================================= */
+.gt-divider {
+  border: none;
+  border-top: 1px solid var(--gt-border-solid);
+}
+
+/* =============================================
+   ICON BOX
+   ============================================= */
+.icon-box-primary {
+  background-color: var(--brand-primary-xlight);
+  color: var(--brand-primary);
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon-box-primary:hover,
+.group:hover .icon-box-primary {
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(63, 61, 153, 0.25);
+}
+
+/* =============================================
+   SCROLLBAR
+   ============================================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gt-bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary-dark);
+}
