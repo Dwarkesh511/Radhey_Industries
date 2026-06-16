@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
+import LocationMap from "@/components/LocationMap";
 import { Phone, Mail, MapPin, Globe, ArrowRight, ChevronDown } from "lucide-react";
 import { contactAddress, contactDetails, contactPhones } from "@/lib/contactDetails";
 
@@ -125,21 +126,25 @@ export default function ContactPage() {
                  </form>
               </motion.div>
 
-              <motion.div {...sectionEntry} className="h-full min-h-[400px] glass-card rounded-xl relative overflow-hidden gt-bg-secondary flex items-center justify-center">
-                 <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,1)_1px,transparent_1px)] bg-[size:40px_40px] dark:opacity-10 light:opacity-[0.03]" />
-                 <div className="relative z-10 flex flex-col items-center text-center p-6">
-                    <div className="relative mb-6">
-                      <div className="absolute inset-0 bg-[#3F3D99] rounded-full animate-ping opacity-15" />
-                      <div className="w-16 h-16 gt-bg-secondary border border-[rgba(63,61,153,0.35)] rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(63,61,153,0.20)]">
-                        <MapPin className="w-8 h-8 text-[#3F3D99]" />
-                      </div>
-                    </div>
-                    <h3 className="text-2xl font-heading font-bold gt-text-primary mb-2">RADHEY Industries</h3>
-                    <p className="gt-text-secondary max-w-sm text-sm leading-relaxed">
-                      {contactDetails.addressLines.map((line) => (
-                        <span key={line} className="block">{line}</span>
-                      ))}
-                    </p>
+              <motion.div {...sectionEntry} className="h-full min-h-[500px] md:min-h-[600px] glass-card rounded-xl relative overflow-hidden">
+                 <LocationMap />
+                 <div className="absolute inset-x-0 bottom-0 bg-white/95 backdrop-blur-md border-t border-[#E5E7EB] p-6 sm:p-8 z-10">
+                   <p className="text-xs uppercase tracking-[0.3em] text-[#3F3D99] mb-2">Our Location</p>
+                   <h3 className="text-2xl font-heading font-bold gt-text-primary mb-3">RADHEY Industries</h3>
+                   <address className="not-italic gt-text-secondary text-sm leading-relaxed mb-5 max-w-lg">
+                     1-309/1, Opp. Meghmani Organic,<br />
+                     Nr. Shree Ram Weigh Bridge, Phase II,<br />
+                     G.I.D.C., Vatva, Ahmedabad - 382445,<br />
+                     Gujarat, India
+                   </address>
+                   <a
+                     href="https://maps.google.com/?q=1-309/1,+Opp.+Meghmani+Organic,+Vatva,+Ahmedabad"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="inline-flex items-center justify-center px-6 py-3 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.20)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.28)] uppercase tracking-wide text-sm"
+                   >
+                     Get Directions
+                   </a>
                  </div>
               </motion.div>
            </div>

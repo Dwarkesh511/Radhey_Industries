@@ -38,6 +38,9 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    headers: {
+      "Content-Security-Policy": "frame-src 'self' https://www.google.com https://maps.google.com https://maps.googleapis.com",
+    }
   },
   preview: {
     port,
