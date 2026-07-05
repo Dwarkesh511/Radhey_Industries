@@ -59,7 +59,7 @@ export default function Navbar() {
                 href="/assets/brochure/radhey-brochure.pdf"
                 onClick={(e) => {
                   e.preventDefault();
-                  window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer");
+                  window.open(`${window.location.origin}/assets/brochure/radhey-brochure.pdf`, "_blank");
                 }}
                 className="relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md group text-[#3F3D99] hover:text-[#2D2B7A] cursor-pointer"
               >
