@@ -40,13 +40,13 @@ export default function Navbar() {
           : "bg-white/90 backdrop-blur-sm py-3 shadow-sm border-b border-[rgba(63,61,153,0.08)]"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between h-20 md:h-24">
+      <div className="container mx-auto px-6 flex items-center justify-between h-24 md:h-28">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <img
             src={brandLogo}
             alt="RADHEY Industries"
-            className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            className="h-20 md:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
           />
         </Link>
 

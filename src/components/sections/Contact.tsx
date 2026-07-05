@@ -1,30 +1,34 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
 import { contactDetails } from "@/lib/contactDetails";
+import LocationMap from "@/components/LocationMap";
 
 export default function Contact() {
   return (
     <section id="contact" className="py-28 bg-[#F8FAFC]">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-          {/* Left: Info */}
+          {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="flex flex-col w-full"
           >
+            {/* 1. Existing section heading */}
             <span className="section-label">Get in Touch</span>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#3F3D99] mb-6">
               Start Your Next Project
             </h2>
-            <p className="text-[#6B7280] mb-12 font-light text-lg leading-relaxed">
+            <p className="text-[#6B7280] mb-10 font-light text-lg leading-relaxed">
               Contact our engineering team to discuss your specific cylinder requirements.
               We provide global shipping and dedicated technical support.
             </p>
 
-            <div className="space-y-7">
+            {/* 2. Contact Information Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
               {[
                 {
                   icon: <MapPin className="w-5 h-5" />,
@@ -60,26 +64,60 @@ export default function Contact() {
                   ),
                 },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 group">
+                <div key={i} className="flex items-start gap-3 group">
                   <div className="icon-box-primary shrink-0">
                     {item.icon}
                   </div>
                   <div>
                     <h4 className="text-[#1F2937] font-bold mb-1 text-sm">{item.title}</h4>
-                    <p className="text-[#6B7280] font-light text-sm leading-relaxed">{item.text}</p>
+                    <div className="text-[#6B7280] font-light text-xs leading-relaxed">{item.text}</div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* 3. Map Card */}
+            <div className="bg-white rounded-2xl border border-[#E8E8F5] shadow-[0_4px_24px_rgba(63,61,153,0.08)] flex flex-col overflow-hidden h-[480px] w-full">
+              {/* Top part: Map */}
+              <div className="flex-1 w-full min-h-0 relative overflow-hidden">
+                <div className="absolute inset-0 w-full h-full">
+                  <LocationMap />
+                </div>
+              </div>
+
+              {/* Bottom part: Info Panel */}
+              <div className="p-5 md:p-6 border-t border-[#E8E8F5] bg-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F3D99] block">
+                    Our Location
+                  </span>
+                  <h4 className="text-base font-bold text-[#1F2937]">
+                    RADHEY Industries
+                  </h4>
+                  <p className="text-xs text-[#6B7280] font-light leading-relaxed max-w-md">
+                    1-309/1, Opp. Meghmani Organic, Nr. Shree Ram Weigh Bridge, Phase II, G.I.D.C., Vatva, Ahmedabad – 382445, Gujarat, India
+                  </p>
+                </div>
+                <a
+                  href="https://maps.google.com/?q=1-309/1,+Opp.+Meghmani+Organic,+Vatva,+Ahmedabad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 bg-[#ED3237] text-white rounded-lg font-bold uppercase tracking-wider text-xs hover:bg-[#C62828] transition-all duration-300 shadow-[0_4px_15px_rgba(237,50,55,0.2)] hover:shadow-[0_6px_20px_rgba(237,50,55,0.3)] hover:-translate-y-0.5 shrink-0 inline-flex items-center gap-1.5"
+                >
+                  GET DIRECTIONS <span className="text-sm">→</span>
+                </a>
+              </div>
+            </div>
+
           </motion.div>
 
-          {/* Right: Form */}
+          {/* Right Column: Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white p-8 md:p-10 rounded-2xl border border-[#E8E8F5] shadow-[0_4px_24px_rgba(63,61,153,0.08)]"
+            className="bg-white p-8 md:p-10 rounded-2xl border border-[#E8E8F5] shadow-[0_4px_24px_rgba(63,61,153,0.08)] lg:self-end w-full"
           >
             <h3 className="text-xl font-heading font-bold text-[#3F3D99] mb-6">Send Us a Message</h3>
             <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
