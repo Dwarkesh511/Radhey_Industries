@@ -24,7 +24,7 @@ export default function Navbar() {
     { name: "About Us", href: "/about" },
     { name: "Products", href: "/products" },
     { name: "Quality", href: "/quality" },
-    { name: "Portfolio", href: "/gallery" },
+    { name: "Portfolio", href: "/assets/brochure/radhey-brochure.pdf", external: true },
     { name: "Contact", href: "/contact" },
   ];
 
