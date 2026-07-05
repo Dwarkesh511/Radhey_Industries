@@ -10,7 +10,6 @@ import Home from "@/pages/Home";
 import AboutPage from "@/pages/AboutPage";
 import ProductsPage from "@/pages/ProductsPage";
 import QualityPage from "@/pages/QualityPage";
-import GalleryPage from "@/pages/GalleryPage";
 import ContactPage from "@/pages/ContactPage";
 
 const queryClient = new QueryClient();
@@ -31,7 +30,6 @@ function AnimatedRoutes() {
           <Route path="/about" component={AboutPage} />
           <Route path="/products" component={ProductsPage} />
           <Route path="/quality" component={QualityPage} />
-          <Route path="/gallery" component={GalleryPage} />
           <Route path="/contact" component={ContactPage} />
           <Route component={NotFound} />
         </Switch>

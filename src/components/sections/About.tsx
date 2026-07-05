@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import aboutFacility from "@/assets/about-facility.jpg";
-import { CheckCircle2 } from "lucide-react";
 
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -30,12 +29,7 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 }
 
 export default function About() {
-  const highlights = [
-    "ISO 9001:2015 Certified Manufacturing",
-    "State-of-the-art TRUMPF Laser Technology",
-    "Sub-micron tolerance precision",
-    "24/7 production facility",
-  ];
+
 
   return (
     <section id="about" className="py-28 bg-white relative overflow-hidden">
@@ -65,15 +59,7 @@ export default function About() {
               tolerances for the most demanding packaging and decorative applications.
             </p>
 
-            {/* Highlights */}
-            <ul className="space-y-3 mb-10">
-              {highlights.map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-[#1F2937] text-sm font-medium">
-                  <CheckCircle2 className="w-5 h-5 text-[#3F3D99] shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 border-t border-[#E8E8F5] pt-8">

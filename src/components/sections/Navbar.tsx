@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import brandLogo from "@/assets/logo/radhey_logo.png";
+import brochurePdf from "@/assets/brochure/radhey-brochure.pdf";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -53,23 +54,41 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md group ${
-                isActive(link.href)
-                  ? "text-[#ED3237]"
-                  : "text-[#3F3D99] hover:text-[#2D2B7A]"
-              }`}
-            >
-              {link.name}
-              {/* Red hover/active underline */}
-              <span
-                className={`absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-[#ED3237] transition-all duration-300 ${
-                  isActive(link.href) ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
-                } group-hover:opacity-100 group-hover:scale-x-100 origin-center`}
-              />
-            </Link>
+            link.name === "Portfolio" ? (
+              <a
+                key={link.name}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(brochurePdf, "_blank", "noopener,noreferrer");
+                }}
+                className="relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md group text-[#3F3D99] hover:text-[#2D2B7A] cursor-pointer"
+              >
+                {link.name}
+                {/* Red hover/active underline */}
+                <span
+                  className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-[#ED3237] transition-all duration-300 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 origin-center"
+                />
+              </a>
+            ) : (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md group ${
+                  isActive(link.href)
+                    ? "text-[#ED3237]"
+                    : "text-[#3F3D99] hover:text-[#2D2B7A]"
+                }`}
+              >
+                {link.name}
+                {/* Red hover/active underline */}
+                <span
+                  className={`absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-[#ED3237] transition-all duration-300 ${
+                    isActive(link.href) ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+                  } group-hover:opacity-100 group-hover:scale-x-100 origin-center`}
+                />
+              </Link>
+            )
           ))}
         </div>
 
@@ -126,21 +145,36 @@ export default function Navbar() {
             className="absolute top-full left-0 w-full bg-white border-b border-[#D1D5DB] flex flex-col py-4 px-6 md:hidden shadow-lg"
           >
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`py-3 text-sm font-medium transition-colors border-b border-[#F1F5F9] last:border-none flex items-center gap-2 ${
-                  isActive(link.href)
-                    ? "text-[#ED3237]"
-                    : "text-[#3F3D99] hover:text-[#2D2B7A]"
-                }`}
-              >
-                {isActive(link.href) && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#ED3237] shrink-0" />
-                )}
-                {link.name}
-              </Link>
+              link.name === "Portfolio" ? (
+                <a
+                  key={link.name}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    window.open(brochurePdf, "_blank", "noopener,noreferrer");
+                  }}
+                  className="py-3 text-sm font-medium transition-colors border-b border-[#F1F5F9] last:border-none flex items-center gap-2 text-[#3F3D99] hover:text-[#2D2B7A] cursor-pointer"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`py-3 text-sm font-medium transition-colors border-b border-[#F1F5F9] last:border-none flex items-center gap-2 ${
+                    isActive(link.href)
+                      ? "text-[#ED3237]"
+                      : "text-[#3F3D99] hover:text-[#2D2B7A]"
+                  }`}
+                >
+                  {isActive(link.href) && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ED3237] shrink-0" />
+                  )}
+                  {link.name}
+                </Link>
+              )
             ))}
             <Link
               href="/contact"

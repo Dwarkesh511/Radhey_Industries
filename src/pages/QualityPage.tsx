@@ -68,35 +68,6 @@ export default function QualityPage() {
         </div>
       </section>
 
-      {/* Quality Overview */}
-      <section className="py-24 gt-bg-secondary">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-             <motion.div {...sectionEntry}>
-               <h2 className="text-3xl md:text-4xl font-heading font-bold gt-text-primary mb-6">Zero Tolerance for Error</h2>
-               <p className="gt-text-secondary text-lg font-light leading-relaxed mb-6">
-                 Quality isn't a final step; it is embedded into the DNA of our manufacturing process. From raw material sourcing to final dispatch, we employ a multi-tier inspection protocol.
-               </p>
-               <p className="gt-text-secondary font-light leading-relaxed">
-                 Our dedicated QA team utilizes advanced metrology equipment to verify dimensional accuracy, surface finish, hardness, and dynamic balance, ensuring your cylinders deliver consistent, high-fidelity results.
-               </p>
-             </motion.div>
-             <div className="space-y-6">
-               {[
-                 { title: "ISO 9001:2015 System", desc: "Strict adherence to international quality management protocols." },
-                 { title: "100% Optical Verification", desc: "Every engraved cell is verified using advanced digital microscopy." },
-                 { title: "Material Traceability", desc: "Complete documentation and tracking from raw steel to finished product." }
-               ].map((item, i) => (
-                 <motion.div key={i} {...sectionEntry} className="glass-card p-6 rounded-lg border-l-4 border-[#ED3237]">
-                   <h3 className="text-xl font-heading font-bold gt-text-primary mb-2">{item.title}</h3>
-                   <p className="gt-text-secondary text-sm font-light">{item.desc}</p>
-                 </motion.div>
-               ))}
-             </div>
-          </div>
-        </div>
-      </section>
-
       {/* Inspection Process Timeline */}
       <section className="py-24 gt-bg-primary">
         <div className="container mx-auto px-6">

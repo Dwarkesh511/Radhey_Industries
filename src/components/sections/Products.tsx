@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import packagingCylindersImg from "@/assets/packaging-cylinders.png";
+import packagingCylindersImg from "@/assets/packaging-cylinders.jpg";
 import wovenSackCylindersImg from "@/assets/woven-sack-cylinders.png";
 import shrinkSleeveCylindersImg from "@/assets/shrink-sleeve-cylinders.png";
 import paperPrintingCylindersImg from "@/assets/paper-printing-cylinders.png";
 import leatherPrintingRollersImg from "@/assets/leather-printing-rollers.png";
-import aniloxCoatingRollersImg from "@/assets/anilox-coating-rollers.png";
+import aniloxCoatingRollersImg from "@/assets/anilox-coating-rollers.jpg";
 
 const products = [
   {
@@ -84,7 +84,11 @@ export default function Products() {
               <img
                 src={product.img}
                 alt={product.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-110 ${
+                  product.title === "Flexible Packaging Cylinders"
+                    ? "object-contain bg-white p-4"
+                    : "object-cover"
+                }`}
               />
 
               {/* Dark premium blue/black gradient overlay for maximum readability */}

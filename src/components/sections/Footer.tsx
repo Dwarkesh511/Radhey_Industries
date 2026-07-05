@@ -2,6 +2,7 @@ import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
 import brandLogo from "@/assets/logo/radhey_logo.png";
 import { contactDetails } from "@/lib/contactDetails";
+import brochurePdf from "@/assets/brochure/radhey-brochure.pdf";
 
 export default function Footer({ hideIndustries = false }: { hideIndustries?: boolean }) {
   return (
@@ -80,9 +81,20 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
             <h5 className="text-white font-bold uppercase tracking-wider text-xs mb-6">Company</h5>
             <ul className="space-y-3">
               <li><Link href="/about" className="footer-link hover:text-[#ED3237]">About Us</Link></li>
+              <li><Link href="/products" className="footer-link hover:text-[#ED3237]">Products</Link></li>
               <li><Link href="/quality" className="footer-link hover:text-[#ED3237]">Quality</Link></li>
-              <li><Link href="/gallery" className="footer-link hover:text-[#ED3237]">Portfolio</Link></li>
-              <li><a href="/#technology" className="footer-link hover:text-[#ED3237]">Technology</a></li>
+              <li>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(brochurePdf, "_blank", "noopener,noreferrer");
+                  }}
+                  className="footer-link hover:text-[#ED3237] cursor-pointer"
+                >
+                  Portfolio
+                </a>
+              </li>
               <li><Link href="/contact" className="footer-link hover:text-[#ED3237]">Contact</Link></li>
             </ul>
           </div>

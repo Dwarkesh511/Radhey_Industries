@@ -4,6 +4,7 @@ import PageLayout from "@/components/PageLayout";
 import LocationMap from "@/components/LocationMap";
 import { Phone, Mail, MapPin, Globe, ArrowRight, ChevronDown } from "lucide-react";
 import { contactAddress, contactDetails, contactPhones } from "@/lib/contactDetails";
+import brochurePdf from "@/assets/brochure/radhey-brochure.pdf";
 
 export default function ContactPage() {
   const sectionEntry = {
@@ -163,12 +164,13 @@ export default function ContactPage() {
                <button className="px-8 py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.20)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.28)] hover:-translate-y-[3px] uppercase tracking-wide text-sm">
                  Schedule a Visit
                </button>
-               <button 
-                 className="px-8 py-4 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors backdrop-blur-sm uppercase tracking-wide text-sm"
-                 style={{ borderColor: "var(--gt-border)" }}
-               >
-                 Download Brochure
-               </button>
+                <button 
+                  onClick={() => window.open(brochurePdf, "_blank", "noopener,noreferrer")}
+                  className="px-8 py-4 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors backdrop-blur-sm uppercase tracking-wide text-sm"
+                  style={{ borderColor: "var(--gt-border)" }}
+                >
+                  Download Brochure
+                </button>
             </div>
          </div>
       </section>
