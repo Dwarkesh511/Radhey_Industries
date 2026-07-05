@@ -47,7 +47,7 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
               <img
                 src={brandLogo}
                 alt="RADHEY Industries"
-                className="h-14 w-auto object-contain brightness-0 invert"
+                className="h-20 w-auto object-contain brightness-0 invert"
               />
             </div>
             <p className="text-white/60 max-w-xs text-sm leading-relaxed mb-8">
