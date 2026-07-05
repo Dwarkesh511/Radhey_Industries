@@ -27,20 +27,8 @@ export default function Contact() {
               We provide global shipping and dedicated technical support.
             </p>
 
-            {/* 2. Contact Information Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               {[
-                {
-                  icon: <MapPin className="w-5 h-5" />,
-                  title: "Global Headquarters",
-                  text: (
-                    <>
-                      {contactDetails.addressLines.map((line) => (
-                        <span key={line} className="block">{line}</span>
-                      ))}
-                    </>
-                  ),
-                },
                 {
                   icon: <Phone className="w-5 h-5" />,
                   title: "Phone",
