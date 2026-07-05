@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import brandLogo from "@/assets/logo/radhey_logo.png";
-import brochurePdf from "@/assets/brochure/radhey-brochure.pdf";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -57,10 +56,10 @@ export default function Navbar() {
             link.name === "Portfolio" ? (
               <a
                 key={link.name}
-                href="#"
+                href="/assets/brochure/radhey-brochure.pdf"
                 onClick={(e) => {
                   e.preventDefault();
-                  window.open(brochurePdf, "_blank", "noopener,noreferrer");
+                  window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer");
                 }}
                 className="relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md group text-[#3F3D99] hover:text-[#2D2B7A] cursor-pointer"
               >
@@ -148,11 +147,11 @@ export default function Navbar() {
               link.name === "Portfolio" ? (
                 <a
                   key={link.name}
-                  href="#"
+                  href="/assets/brochure/radhey-brochure.pdf"
                   onClick={(e) => {
                     e.preventDefault();
                     setMobileMenuOpen(false);
-                    window.open(brochurePdf, "_blank", "noopener,noreferrer");
+                    window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer");
                   }}
                   className="py-3 text-sm font-medium transition-colors border-b border-[#F1F5F9] last:border-none flex items-center gap-2 text-[#3F3D99] hover:text-[#2D2B7A] cursor-pointer"
                 >

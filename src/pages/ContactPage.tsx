@@ -4,7 +4,6 @@ import PageLayout from "@/components/PageLayout";
 import LocationMap from "@/components/LocationMap";
 import { Phone, Mail, MapPin, Globe, ArrowRight, ChevronDown } from "lucide-react";
 import { contactAddress, contactDetails, contactPhones } from "@/lib/contactDetails";
-import brochurePdf from "@/assets/brochure/radhey-brochure.pdf";
 
 export default function ContactPage() {
   const sectionEntry = {
@@ -165,7 +164,7 @@ export default function ContactPage() {
                  Schedule a Visit
                </button>
                 <button 
-                  onClick={() => window.open(brochurePdf, "_blank", "noopener,noreferrer")}
+                  onClick={() => window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer")}
                   className="px-8 py-4 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors backdrop-blur-sm uppercase tracking-wide text-sm"
                   style={{ borderColor: "var(--gt-border)" }}
                 >

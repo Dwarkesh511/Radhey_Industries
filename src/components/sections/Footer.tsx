@@ -2,7 +2,6 @@ import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
 import brandLogo from "@/assets/logo/radhey_logo.png";
 import { contactDetails } from "@/lib/contactDetails";
-import brochurePdf from "@/assets/brochure/radhey-brochure.pdf";
 
 export default function Footer({ hideIndustries = false }: { hideIndustries?: boolean }) {
   return (
@@ -85,10 +84,10 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
               <li><Link href="/quality" className="footer-link hover:text-[#ED3237]">Quality</Link></li>
               <li>
                 <a
-                  href="#"
+                  href="/assets/brochure/radhey-brochure.pdf"
                   onClick={(e) => {
                     e.preventDefault();
-                    window.open(brochurePdf, "_blank", "noopener,noreferrer");
+                    window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer");
                   }}
                   className="footer-link hover:text-[#ED3237] cursor-pointer"
                 >
