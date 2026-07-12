@@ -4,8 +4,8 @@ const steps = [
   { num: "01", title: "Design & Consult", desc: "Digital prepress, colour separation & technical proofing" },
   { num: "02", title: "Base Preparation", desc: "Forged steel core CNC turning & dynamic balancing" },
   { num: "03", title: "Copper Plating", desc: "Automated electrolytic copper deposition, 200μm" },
-  { num: "04", title: "Laser Engraving", desc: "Sub-micron cell geometry using fibre laser systems" },
-  { num: "05", title: "Chrome Finishing", desc: "Hard chrome 8–12μm for maximum print durability" },
+  { num: "04", title: "Engraving", desc: "Sub-micron cell geometry using fibre laser systems" },
+  { num: "05", title: "Chrome Finishing", desc: "Hard chrome 10–12µm for maximum print durability" },
   { num: "06", title: "Quality Release", desc: "100% optical cell measurement & press proofing" },
 ];
 

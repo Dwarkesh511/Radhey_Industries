@@ -181,7 +181,7 @@ export default function Navbar() {
               className="mt-4 px-6 py-3 bg-[#ED3237] text-white text-center rounded-md font-semibold transition-all duration-300 uppercase tracking-wide text-sm hover:bg-[#C62828] hover:-translate-y-[3px] shadow-[0_4px_14px_rgba(237,50,55,0.25)]"
             >
               Request Quote
-            </Link>
+            </Link> 
           </motion.div>
         )}
       </AnimatePresence>

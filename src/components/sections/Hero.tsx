@@ -87,7 +87,7 @@ export default function Hero() {
         {[
           { label: "Surface Roughness", value: "Ra 0.1 μm" },
           { label: "Diameter Tolerance", value: "±0.001 mm" },
-          { label: "Chrome Thickness", value: "8-12 μm" },
+          { label: "Chrome Thickness", value: "10–12 µm" },
           { label: "Max Speed", value: "400 m/min" },
         ].map((spec, i) => (
           <motion.div
