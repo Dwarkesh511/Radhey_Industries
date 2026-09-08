@@ -60,11 +60,12 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
             <h5 className="text-white font-bold uppercase tracking-wider text-xs mb-6">Products</h5>
             <ul className="space-y-3">
               {[
-                { name: "Packaging Cylinders", path: "/products" },
-                { name: "Decorative Cylinders", path: "/products" },
-                { name: "Coating Cylinders", path: "/products" },
-                { name: "Embossing Rollers", path: "/products" },
-                { name: "Specialty Cylinders", path: "/products" },
+                { name: "Flexible Packaging Cylinders", path: "/products" },
+                { name: "Woven Sack Bag Cylinders", path: "/products" },
+                { name: "Shrink Sleeve Printing Cylinders", path: "/products" },
+                { name: "Paper Printing Cylinders", path: "/products" },
+                { name: "Leather & Rexin Printing Cylinders", path: "/products" },
+                { name: "Anilox Coating Rollers", path: "/products" },
               ].map((item, i) => (
                 <li key={i}>
                   <Link href={item.path} className="footer-link hover:text-[#ED3237] hover:translate-x-1 inline-block transition-all duration-200">
@@ -160,12 +161,11 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
             <span className="text-white/40 text-xs uppercase tracking-wider mr-3 font-semibold">Industries Served:</span>
             {[
               "Flexible Packaging",
-              "Woven Sack Bags",
-              "Shrink & Sleeves",
+              "Woven Sack",
+              "Shrink Sleeve",
               "Paper Printing",
-              "Decorative Laminates",
               "Leather & Rexin",
-              "Anilox Coating"
+              "Anilox / Coating"
             ].map((ind, i) => (
               <span key={i} className="border border-white/10 text-white/50 text-[11px] px-3 py-1 rounded-full whitespace-nowrap">
                 {ind}

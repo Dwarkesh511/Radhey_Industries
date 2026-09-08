@@ -95,7 +95,7 @@ export default function About() {
 
             {/* Top-right tag */}
             <div className="absolute top-6 right-6 bg-[#ED3237] text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider z-20 shadow-lg">
-              Since 2002
+              Since 1992
             </div>
           </motion.div>
 

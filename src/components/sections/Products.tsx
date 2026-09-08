@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import packagingCylindersImg from "@/assets/packaging-cylinders.jpg";
 import wovenSackCylindersImg from "@/assets/woven-sack-cylinders.png";
-import shrinkSleeveCylindersImg from "@/assets/shrink-sleeve-cylinders.png";
+import shrinkSleeveCylindersImg from "@/assets/shrink_and_sleev/SS-2.jpg";
 import paperPrintingCylindersImg from "@/assets/paper-printing-cylinders.png";
 import leatherPrintingRollersImg from "@/assets/leather-printing-rollers.png";
 import aniloxCoatingRollersImg from "@/assets/anilox-coating-rollers.jpg";
@@ -21,7 +21,7 @@ const products = [
     tag: "Heavy Duty",
   },
   {
-    title: "Shrink & Sleeve Packaging Cylinders",
+    title: "Shrink Sleeve Printing Cylinders",
     desc: "Premium gravure cylinders for shrink sleeves, wrap-around labels, tamper-evident seals and decorative packaging.",
     img: shrinkSleeveCylindersImg,
     tag: "Premium",
@@ -33,7 +33,7 @@ const products = [
     tag: "HD Print",
   },
   {
-    title: "Leather & Rexin Printing Rollers",
+    title: "Leather & Rexin Printing Cylinders",
     desc: "Specialized engraved rollers for leather, rexin, synthetic leather, furnishing materials and decorative surface textures.",
     img: leatherPrintingRollersImg,
     tag: "Specialized",

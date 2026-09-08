@@ -3,6 +3,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 
+// Import Paper Printing and Anilox Coating images
+import paperPrintingCylindersImg from "@/assets/paper-printing-cylinders.png";
+import aniloxCoatingRollersImg from "@/assets/anilox-coating-rollers.jpg";
+
+// Import Flexible Packaging images
+import flex3 from "@/assets/3 FLEXIBLE PACKEGING/BRED.png";
+import flex4 from "@/assets/3 FLEXIBLE PACKEGING/BUTTER MILK-2.png";
+import flex5 from "@/assets/3 FLEXIBLE PACKEGING/BUTTER MILK.png";
+import flex6 from "@/assets/3 FLEXIBLE PACKEGING/CHIP.png";
+import flex8 from "@/assets/3 FLEXIBLE PACKEGING/COW MIKL.png";
+import flex9 from "@/assets/3 FLEXIBLE PACKEGING/Dabele-masala-pouch-100g.jpg";
+import flex10 from "@/assets/3 FLEXIBLE PACKEGING/GHEE.png";
+import flex11 from "@/assets/3 FLEXIBLE PACKEGING/HALD.png";
+import flex12 from "@/assets/3 FLEXIBLE PACKEGING/MILK-1.png";
+import flex13 from "@/assets/3 FLEXIBLE PACKEGING/MILK-2.png";
+import flex14 from "@/assets/3 FLEXIBLE PACKEGING/MILK-3.png";
+import flex15 from "@/assets/3 FLEXIBLE PACKEGING/NAMKEEN-1.png";
+import flex17 from "@/assets/3 FLEXIBLE PACKEGING/RUSK.png";
+import flex18 from "@/assets/3 FLEXIBLE PACKEGING/SALT-1.png";
+import flex19 from "@/assets/3 FLEXIBLE PACKEGING/SPI-1.png";
+import flex20 from "@/assets/3 FLEXIBLE PACKEGING/TEA-1.png";
+import flex21 from "@/assets/3 FLEXIBLE PACKEGING/TOAST.png";
+import flex22 from "@/assets/3 FLEXIBLE PACKEGING/energy powder.png";
+import flex23 from "@/assets/3 FLEXIBLE PACKEGING/food.png";
+
+const flexibleImages = [
+  flex3, flex4, flex5, flex6, flex8, flex9, flex10,
+  flex11, flex12, flex13, flex14, flex15, flex17, flex18, flex19, flex20,
+  flex21, flex22, flex23
+];
+
 // Import Woven Sack images
 import besan2 from "@/assets/WOVEN SACK BAG(1)/BESAN-2.png";
 import besan from "@/assets/WOVEN SACK BAG(1)/BESAN.png";
@@ -20,17 +51,6 @@ import taau from "@/assets/WOVEN SACK BAG(1)/TAAU.png";
 import wallPutty from "@/assets/WOVEN SACK BAG(1)/WALL PUTTY.png";
 import wheat1 from "@/assets/WOVEN SACK BAG(1)/WHEAT-1.png";
 import wheat2 from "@/assets/WOVEN SACK BAG(1)/WHEAT-2.png";
-
-// Import Decorative Laminate images
-import decor1 from "@/assets/DECORATIVE LAMINET/152x120cm-Eco-freinedly-font-b-vinyl-b-font-printed-font-b-table-b-font-font-b.jpg";
-import decor2 from "@/assets/DECORATIVE LAMINET/4.jpg";
-import decor3 from "@/assets/DECORATIVE LAMINET/462366096_765.jpg";
-import decor4 from "@/assets/DECORATIVE LAMINET/A1W+x3iWXPL._SL1500_.jpg";
-import decor5 from "@/assets/DECORATIVE LAMINET/Lam-04B.jpg";
-import decor6 from "@/assets/DECORATIVE LAMINET/april showers umbrellas.png";
-import decor7 from "@/assets/DECORATIVE LAMINET/imgrc0067956882.jpg";
-import decor8 from "@/assets/DECORATIVE LAMINET/kinderen-regenjas-honingbij-giraffe-dier-jongen-meisjes-regenjas-van-pvc-waterdicht-koreaanse-kinderen-regenpak-regenkleding-met.jpg";
-import decor9 from "@/assets/DECORATIVE LAMINET/school_kids_inflate_brim_long_PVC_rain_coat_1039-4_1024x1024.jpg";
 
 const wovenSackImages = [
   rice1,
@@ -51,47 +71,21 @@ const wovenSackImages = [
   wheat2
 ];
 
-const decorativeImages = [
-  decor1,
-  decor2,
-  decor3,
-  decor4,
-  decor5,
-  decor6,
-  decor7,
-  decor8,
-  decor9
-];
+// Import Shrink Sleeve images
+import ss2 from "@/assets/shrink_and_sleev/SS-2.jpg";
+import ss3 from "@/assets/shrink_and_sleev/SS-3.webp";
+import ss4 from "@/assets/shrink_and_sleev/SS-4.jpg";
+import ss5 from "@/assets/shrink_and_sleev/SS-5.jpg";
+import ss6 from "@/assets/shrink_and_sleev/SS-6.jpg";
+import ss7 from "@/assets/shrink_and_sleev/SS-7.jpg";
 
-// Import Flexible Packaging images
-import flex1 from "@/assets/3 FLEXIBLE PACKEGING/ATTA-1.png";
-import flex2 from "@/assets/3 FLEXIBLE PACKEGING/ATTA-2.png";
-import flex3 from "@/assets/3 FLEXIBLE PACKEGING/BRED.png";
-import flex4 from "@/assets/3 FLEXIBLE PACKEGING/BUTTER MILK-2.png";
-import flex5 from "@/assets/3 FLEXIBLE PACKEGING/BUTTER MILK.png";
-import flex6 from "@/assets/3 FLEXIBLE PACKEGING/CHIP.png";
-import flex7 from "@/assets/3 FLEXIBLE PACKEGING/COOFI.jpg";
-import flex8 from "@/assets/3 FLEXIBLE PACKEGING/COW MIKL.png";
-import flex9 from "@/assets/3 FLEXIBLE PACKEGING/Dabele-masala-pouch-100g.jpg";
-import flex10 from "@/assets/3 FLEXIBLE PACKEGING/GHEE.png";
-import flex11 from "@/assets/3 FLEXIBLE PACKEGING/HALD.png";
-import flex12 from "@/assets/3 FLEXIBLE PACKEGING/MILK-1.png";
-import flex13 from "@/assets/3 FLEXIBLE PACKEGING/MILK-2.png";
-import flex14 from "@/assets/3 FLEXIBLE PACKEGING/MILK-3.png";
-import flex15 from "@/assets/3 FLEXIBLE PACKEGING/NAMKEEN-1.png";
-import flex16 from "@/assets/3 FLEXIBLE PACKEGING/RICE-1.png";
-import flex17 from "@/assets/3 FLEXIBLE PACKEGING/RUSK.png";
-import flex18 from "@/assets/3 FLEXIBLE PACKEGING/SALT-1.png";
-import flex19 from "@/assets/3 FLEXIBLE PACKEGING/SPI-1.png";
-import flex20 from "@/assets/3 FLEXIBLE PACKEGING/TEA-1.png";
-import flex21 from "@/assets/3 FLEXIBLE PACKEGING/TOAST.png";
-import flex22 from "@/assets/3 FLEXIBLE PACKEGING/energy powder.png";
-import flex23 from "@/assets/3 FLEXIBLE PACKEGING/food.png";
-
-const flexibleImages = [
-  flex1, flex2, flex3, flex4, flex5, flex6, flex7, flex8, flex9, flex10,
-  flex11, flex12, flex13, flex14, flex15, flex16, flex17, flex18, flex19, flex20,
-  flex21, flex22, flex23
+const shrinkSleeveImages = [
+  ss2,
+  ss3,
+  ss4,
+  ss5,
+  ss6,
+  ss7
 ];
 
 // Import Leather & Rexin images
@@ -122,6 +116,12 @@ interface Product {
   description: string;
   specs: { key: string; value: string }[];
   fullDesc: string;
+  overview?: string;
+  applications?: string[];
+  features?: string[];
+  materials?: string[];
+  advantages?: string;
+  industries?: string;
 }
 
 const productsData: Product[] = [
@@ -129,7 +129,7 @@ const productsData: Product[] = [
     id: 1,
     name: "Flexible Packaging Cylinders",
     category: "Flexible Packaging",
-    image: flex1,
+    image: flex3,
     images: flexibleImages,
     description: "High-precision rotogravure cylinders specially designed for flexible packaging applications including food packaging, FMCG products, pharmaceuticals, personal care, household products, laminated films, pouches, and industrial packaging. Engineered for superior print quality, accurate registration, excellent ink transfer, and long production life.",
     specs: [
@@ -137,50 +137,37 @@ const productsData: Product[] = [
       { key: "Feature 2", value: "FMCG" },
       { key: "Feature 3", value: "High Precision" }
     ],
-    fullDesc: "High-precision rotogravure cylinders specially designed for flexible packaging applications including food packaging, FMCG products, pharmaceuticals, personal care, household products, laminated films, pouches, and industrial packaging. Engineered for superior print quality, accurate registration, excellent ink transfer, and long production life."
+    fullDesc: "High-precision rotogravure cylinders specially designed for flexible packaging applications including food packaging, FMCG products, pharmaceuticals, personal care, household products, laminated films, pouches, and industrial packaging. Engineered for superior print quality, accurate registration, excellent ink transfer, and long production life.",
+    overview: "High-precision rotogravure cylinders specially designed for flexible packaging applications including food packaging, FMCG products, pharmaceuticals, personal care, household products, laminated films, pouches, and industrial packaging.",
+    applications: [
+      "Food Packaging",
+      "FMCG Packaging",
+      "Pharmaceuticals",
+      "Personal Care & Household",
+      "Laminated Films & Pouches"
+    ],
+    features: [
+      "High engraving precision",
+      "Excellent ink transfer",
+      "Accurate color registration",
+      "Superior wear resistance",
+      "Mirror polished finish",
+      "High-speed printing compatibility",
+      "Long service life"
+    ],
+    materials: [
+      "BOPP",
+      "PET",
+      "CPP",
+      "PE",
+      "Aluminum Foil",
+      "Paper Laminated"
+    ],
+    advantages: "Delivers crisp dot reproduction and consistent ink release over millions of meters, reducing downtime and waste.",
+    industries: "Food & Beverage, FMCG, Pharmaceuticals, Household Goods, Flexible Packaging Converter."
   },
   {
     id: 2,
-    name: "Decorative Cylinders",
-    category: "Decorative",
-    image: decor1,
-    images: decorativeImages,
-    description: "High-precision rotogravure cylinders designed for decorative laminates, furniture laminates, wall panels, wallpapers, PVC films, and decorative surface printing. Manufactured to produce sharp engraving, consistent texture reproduction, and premium decorative finishes.",
-    specs: [
-      { key: "Feature 1", value: "Decorative Laminates" },
-      { key: "Feature 2", value: "Furniture Panels" },
-      { key: "Feature 3", value: "High Precision" }
-    ],
-    fullDesc: "High-precision rotogravure cylinders designed for decorative laminates, furniture laminates, wall panels, wallpapers, PVC films, and decorative surface printing. Manufactured to produce sharp engraving, consistent texture reproduction, and premium decorative finishes."
-  },
-  {
-    id: 3,
-    name: "Leather & Rexin Printing Cylinders",
-    category: "Leather & Rexin",
-    image: leather1,
-    images: leatherImages,
-    description: "Premium-quality rotogravure cylinders specially engineered for leather, rexin, synthetic leather, PVC leather, PU leather, upholstery materials, footwear, automotive interiors, handbags, furniture coverings, and decorative surface printing. Designed to produce sharp engraving, consistent texture reproduction, superior ink transfer, and long production life.",
-    specs: [
-      { key: "Feature 1", value: "Leather" },
-      { key: "Feature 2", value: "Rexin" },
-      { key: "Feature 3", value: "Decorative Printing" }
-    ],
-    fullDesc: "Premium-quality rotogravure cylinders specially engineered for leather, rexin, synthetic leather, PVC leather, PU leather, upholstery materials, footwear, automotive interiors, handbags, furniture coverings, and decorative surface printing. Designed to produce sharp engraving, consistent texture reproduction, superior ink transfer, and long production life."
-  },
-  {
-    id: 4,
-    name: "Embossing Rollers",
-    category: "Embossing",
-    description: "Heavy-duty embossing rollers creating deep 3D textures on various substrates.",
-    specs: [
-      { key: "Core", value: "Forged Steel" },
-      { key: "Depth", value: "Up to 3mm" },
-      { key: "Application", value: "Textured Surfaces" }
-    ],
-    fullDesc: "Our heavy-duty embossing rollers add tactile dimension to your products. Manufactured from premium forged steel and deeply engraved to exact specifications, these rollers withstand immense pressure to create permanent, crisp 3D textures on foil, paper, plastics, and non-wovens."
-  },
-  {
-    id: 5,
     name: "Woven Sack Bag Cylinders",
     category: "Woven Sack",
     image: rice1,
@@ -191,19 +178,181 @@ const productsData: Product[] = [
       { key: "Feature 2", value: "BOPP Laminated" },
       { key: "Feature 3", value: "Industrial Packaging" }
     ],
-    fullDesc: "High-precision rotogravure cylinders engineered for PP woven sacks, BOPP laminated bags, fertilizer bags, cement bags, rice bags, flour bags, sugar bags and other industrial packaging applications. Designed for sharp print quality, accurate registration and long production life."
+    fullDesc: "High-precision rotogravure cylinders engineered for PP woven sacks, BOPP laminated bags, fertilizer bags, cement bags, rice bags, flour bags, sugar bags and other industrial packaging applications. Designed for sharp print quality, accurate registration and long production life.",
+    overview: "High-precision rotogravure cylinders engineered for PP woven sacks, BOPP laminated bags, fertilizer bags, cement bags, rice bags, flour bags, sugar bags and other industrial packaging applications.",
+    applications: [
+      "Fertilizer Bags",
+      "Cement & Building Materials",
+      "Rice & Flour Sacks",
+      "Animal Feed Bags",
+      "BOPP Laminated Woven Sacks"
+    ],
+    features: [
+      "Heavy-duty copper overlay",
+      "Wear-resistant chrome plating",
+      "Optimized cell geometry for coarse substrates",
+      "High registration accuracy",
+      "Long production lifespan"
+    ],
+    materials: [
+      "PP Woven Fabric",
+      "BOPP Film",
+      "HDPE",
+      "Laminated Woven Fabrics"
+    ],
+    advantages: "Built to withstand abrasive inks and tough operating conditions while maintaining vibrant print quality.",
+    industries: "Agriculture, Cement & Building Materials, Grain & Flour Mills, Chemical Packaging."
+  },
+  {
+    id: 3,
+    name: "Shrink Sleeve Printing Cylinders",
+    category: "Shrink Sleeve",
+    image: ss2,
+    images: shrinkSleeveImages,
+    description: "High-performance gravure cylinders specially engineered for shrink sleeve printing applications, delivering exceptional color reproduction, precise registration, and superior print quality for PET, PVC, OPS, and other shrink films.",
+    specs: [
+      { key: "Feature 1", value: "PET / PVC / OPS" },
+      { key: "Feature 2", value: "High Registration Accuracy" },
+      { key: "Feature 3", value: "360° Sleeve Printing" }
+    ],
+    fullDesc: "High-performance gravure cylinders specially engineered for shrink sleeve printing applications, delivering exceptional color reproduction, precise registration, and superior print quality for PET, PVC, OPS, and other shrink films.",
+    overview: "High-performance gravure cylinders specially engineered for shrink sleeve printing applications, delivering exceptional color reproduction, precise registration, and superior print quality for PET, PVC, OPS, and other shrink films.",
+    applications: [
+      "Beverage Labels",
+      "Food Packaging",
+      "Cosmetics",
+      "Pharmaceutical Products",
+      "Personal Care Products",
+      "Household Products"
+    ],
+    features: [
+      "High engraving precision",
+      "Excellent ink transfer",
+      "Accurate color registration",
+      "Superior wear resistance",
+      "Mirror polished finish",
+      "High-speed printing compatibility",
+      "Long service life"
+    ],
+    materials: [
+      "PET",
+      "PVC",
+      "OPS",
+      "PLA",
+      "Other Shrink Films"
+    ],
+    advantages: "Engineered to withstand long production runs while maintaining high-speed printing compatibility and optimal ink transfer, ensuring a lower total cost of ownership and consistent brand presentation.",
+    industries: "Beverage, Food packaging, Cosmetics, Pharmaceuticals, Personal care, and Household products."
+  },
+  {
+    id: 4,
+    name: "Paper Printing Cylinders",
+    category: "Paper Printing",
+    image: paperPrintingCylindersImg,
+    description: "High-precision gravure cylinders designed for high-quality paper printing applications, delivering sharp reproduction, consistent ink transfer, and reliable printing performance.",
+    specs: [
+      { key: "Tag 1", value: "Paper Printing" },
+      { key: "Tag 2", value: "High Precision" },
+      { key: "Tag 3", value: "Consistent Ink Transfer" }
+    ],
+    fullDesc: "High-precision gravure cylinders designed for high-quality paper printing applications, delivering sharp reproduction, consistent ink transfer, and reliable printing performance.",
+    overview: "High-precision rotogravure cylinders designed for high-quality paper printing applications, including coated & uncoated paper, folding cartons, gift wraps, decor paper, and specialty paper packaging.",
+    applications: [
+      "Gift Wraps & Wrapping Paper",
+      "Folding Cartons & Paperboard",
+      "Paper Labels & Decals",
+      "Decor & Wall Paper",
+      "Specialty Paper Packaging"
+    ],
+    features: [
+      "Fine screen engraving for paper surfaces",
+      "Consistent cell depth & ink release",
+      "Smooth doctor blade wiping",
+      "Minimal paper dust buildup",
+      "High-speed paper web compatibility"
+    ],
+    materials: [
+      "Coated Paper",
+      "Uncoated Kraft",
+      "Paperboard",
+      "Decor Paper",
+      "Specialty Substrates"
+    ],
+    advantages: "Delivers sharp image clarity, accurate tone reproduction, and uniform coverage on absorbent paper surfaces.",
+    industries: "Paper Packaging, Commercial Printing, Publishing, Decorative Paper Converting."
+  },
+  {
+    id: 5,
+    name: "Leather & Rexin Printing Cylinders",
+    category: "Leather & Rexin",
+    image: leather1,
+    images: leatherImages,
+    description: "Premium-quality rotogravure cylinders specially engineered for leather, rexin, synthetic leather, PVC leather, PU leather, upholstery materials, footwear, automotive interiors, handbags, furniture coverings, and decorative surface printing. Designed to produce sharp engraving, consistent texture reproduction, superior ink transfer, and long production life.",
+    specs: [
+      { key: "Feature 1", value: "Leather" },
+      { key: "Feature 2", value: "Rexin" },
+      { key: "Feature 3", value: "Decorative Printing" }
+    ],
+    fullDesc: "Premium-quality rotogravure cylinders specially engineered for leather, rexin, synthetic leather, PVC leather, PU leather, upholstery materials, footwear, automotive interiors, handbags, furniture coverings, and decorative surface printing. Designed to produce sharp engraving, consistent texture reproduction, superior ink transfer, and long production life.",
+    overview: "Premium-quality rotogravure cylinders specially engineered for leather, rexin, synthetic leather, PVC leather, PU leather, upholstery materials, footwear, automotive interiors, handbags, furniture coverings, and decorative surface printing.",
+    applications: [
+      "PVC & PU Synthetic Leather",
+      "Automotive Interiors",
+      "Footwear & Footwear Uppers",
+      "Upholstery & Furniture Coverings",
+      "Handbags & Luggage"
+    ],
+    features: [
+      "Deep texturing & embossing engraving capability",
+      "Consistent ink & lacquer transfer",
+      "High resistance to solvent-based chemical inks",
+      "Long service life under high nip pressure"
+    ],
+    materials: [
+      "PVC Leather",
+      "PU Leather",
+      "Synthetic Leather",
+      "Rexin",
+      "Textile Backed Fabrics"
+    ],
+    advantages: "Provides consistent texture and color depth on flexible synthetic leather roll stocks.",
+    industries: "Automotive, Footwear, Fashion Accessories, Upholstery, Artificial Leather Manufacturing."
   },
   {
     id: 6,
-    name: "Industrial Rollers",
-    category: "Industrial",
-    description: "Heavy-gauge industrial rollers for demanding continuous production environments.",
+    name: "Anilox Coating Rollers",
+    category: "Anilox / Coating",
+    image: aniloxCoatingRollersImg,
+    description: "Precision-engineered anilox coating rollers designed for uniform ink and coating transfer, providing consistent coverage and reliable performance across demanding printing applications.",
     specs: [
-      { key: "Strength", value: "Heavy Duty" },
-      { key: "Balancing", value: "Dynamic" },
-      { key: "Application", value: "Continuous Mill" }
+      { key: "Tag 1", value: "Ceramic Anilox" },
+      { key: "Tag 2", value: "Precise Cell Volume" },
+      { key: "Tag 3", value: "Uniform Coating" }
     ],
-    fullDesc: "Built to endure the harshest continuous production environments. Our industrial rollers are dynamically balanced for high-speed operation, featuring enhanced core strength and specialized surface treatments to resist wear, chemicals, and extreme temperatures."
+    fullDesc: "Precision-engineered anilox coating rollers designed for uniform ink and coating transfer, providing consistent coverage and reliable performance across demanding printing applications.",
+    overview: "Precision-engineered anilox coating rollers designed for uniform ink, varnish, adhesive, and barrier coating transfer, providing consistent coverage and reliable performance across demanding printing applications.",
+    applications: [
+      "Flexographic & Gravure Coating",
+      "Varnish & Lacquer Application",
+      "Adhesive & Laminating Coating",
+      "Barrier Coating for Packaging",
+      "Matte & Gloss Surface Finishing"
+    ],
+    features: [
+      "Laser-engraved ceramic or hard-chrome surface",
+      "Exact cell volume & screen count",
+      "Uniform ink metering & transfer",
+      "Superior doctor blade wear resistance",
+      "Easy cleaning & corrosion resistance"
+    ],
+    materials: [
+      "Solvent-based Coatings",
+      "Water-based Lacquers",
+      "UV & EB Curable Coatings",
+      "Adhesives & Primers"
+    ],
+    advantages: "Ensures precise wet film thickness control and consistent coating application without streaks or voids.",
+    industries: "Flexible Packaging, Paper Converting, Label Printing, Industrial Coating."
   }
 ];
 
@@ -321,8 +470,6 @@ function ProductImageSlider({ images, productName, className = "" }: ProductImag
 export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState<typeof productsData[0] | null>(null);
 
-  const filteredProducts = productsData;
-
   const sectionEntry = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -361,12 +508,10 @@ export default function ProductsPage() {
       {/* Products Catalog */}
       <section className="py-24 gt-bg-secondary min-h-screen">
         <div className="container mx-auto px-6">
-          
-
           {/* Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence>
-              {filteredProducts.map(product => (
+              {productsData.map(product => (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -377,17 +522,17 @@ export default function ProductsPage() {
                   onClick={() => setSelectedProduct(product)}
                 >
                   <div className="h-[200px] w-full bg-gradient-to-br from-[#0B1026] via-[#111827] to-[#1E1E4F] relative overflow-hidden">
-                     {(product.category === "Woven Sack" || product.category === "Decorative" || product.category === "Flexible Packaging" || product.category === "Leather & Rexin") && product.images ? (
+                     {product.images && product.images.length > 0 ? (
                        <ProductImageSlider images={product.images} productName={product.name} />
                      ) : (
                        <>
-                         {product.image && (
-                           <img 
-                             src={product.image} 
-                             alt={product.name} 
-                             className="absolute inset-0 w-full h-full object-cover" 
-                           />
-                         )}
+                          {product.image && (
+                            <img 
+                              src={product.image} 
+                              alt={product.name} 
+                              className="absolute inset-0 w-full h-full object-contain p-3 object-center" 
+                            />
+                          )}
                          <div className="absolute inset-0 opacity-20 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] bg-[length:250%_250%] animate-[bg-pan_3s_infinite_linear]" />
                        </>
                      )}
@@ -465,7 +610,7 @@ export default function ProductsPage() {
               onClick={e => e.stopPropagation()}
             >
                <div className="md:w-2/5 bg-gradient-to-br from-[#2a2a2a] to-[#0a0a0a] border-r relative min-h-[250px]" style={{ borderColor: "var(--gt-border)" }}>
-                 {(selectedProduct.category === "Woven Sack" || selectedProduct.category === "Decorative" || selectedProduct.category === "Flexible Packaging" || selectedProduct.category === "Leather & Rexin") && selectedProduct.images ? (
+                 {selectedProduct.images && selectedProduct.images.length > 0 ? (
                    <ProductImageSlider images={selectedProduct.images} productName={selectedProduct.name} />
                  ) : (
                    <>
@@ -473,7 +618,7 @@ export default function ProductsPage() {
                        <img 
                          src={selectedProduct.image} 
                          alt={selectedProduct.name} 
-                         className="absolute inset-0 w-full h-full object-cover" 
+                         className="absolute inset-0 w-full h-full object-contain p-4 object-center" 
                        />
                      )}
                      <div className="absolute inset-0 opacity-30 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.1)_50%,transparent_75%)] bg-[length:200%_200%] animate-[bg-pan_3s_infinite_linear]" />
@@ -484,8 +629,65 @@ export default function ProductsPage() {
                  </div>
                </div>
                <div className="md:w-3/5 p-8 md:p-10 overflow-y-auto">
-                 <h2 className="text-3xl font-heading font-bold gt-text-primary mb-4">{selectedProduct.name}</h2>
-                 <p className="gt-text-secondary font-light leading-relaxed mb-8">{selectedProduct.fullDesc}</p>
+                  <h2 className="text-3xl font-heading font-bold gt-text-primary mb-4">{selectedProduct.name}</h2>
+                  
+                  {selectedProduct.overview ? (
+                    <div className="space-y-6 gt-text-secondary font-light text-sm leading-relaxed mb-8">
+                      <div>
+                        <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Product Overview</h4>
+                        <p>{selectedProduct.overview}</p>
+                      </div>
+                      
+                      {selectedProduct.applications && (
+                        <div>
+                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Applications</h4>
+                          <ul className="list-disc pl-5 space-y-1">
+                            {selectedProduct.applications.map((app, i) => (
+                              <li key={i}>{app}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      
+                      {selectedProduct.features && (
+                        <div>
+                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Features</h4>
+                          <ul className="list-disc pl-5 space-y-1">
+                            {selectedProduct.features.map((feat, i) => (
+                              <li key={i}>{feat}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {selectedProduct.materials && (
+                        <div>
+                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Materials Supported</h4>
+                          <ul className="list-disc pl-5 space-y-1">
+                            {selectedProduct.materials.map((mat, i) => (
+                              <li key={i}>{mat}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {selectedProduct.advantages && (
+                        <div>
+                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Advantages</h4>
+                          <p>{selectedProduct.advantages}</p>
+                        </div>
+                      )}
+
+                      {selectedProduct.industries && (
+                        <div>
+                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Industries Served</h4>
+                          <p>{selectedProduct.industries}</p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <p className="gt-text-secondary font-light leading-relaxed mb-8">{selectedProduct.fullDesc}</p>
+                  )}
                  
                  <div className="flex flex-wrap gap-4 pt-6 border-t" style={{ borderColor: "var(--gt-border)" }}>
                     <a href="/contact" className="px-6 py-3 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.22)] hover:-translate-y-[3px] uppercase tracking-wide text-sm text-center flex-1">

@@ -106,12 +106,15 @@ export default function ContactPage() {
                     
                     <div>
                        <label className="block text-sm font-medium gt-text-secondary mb-2">Requirement Type</label>
-                       <select className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors appearance-none cursor-pointer">
-                         <option>Packaging Cylinders</option>
-                         <option>Decorative Cylinders</option>
-                         <option>Coating Rollers</option>
-                         <option>General Inquiry</option>
-                       </select>
+                        <select className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors appearance-none cursor-pointer">
+                          <option>Flexible Packaging Cylinders</option>
+                          <option>Woven Sack Bag Cylinders</option>
+                          <option>Shrink Sleeve Printing Cylinders</option>
+                          <option>Paper Printing Cylinders</option>
+                          <option>Leather & Rexin Printing Cylinders</option>
+                          <option>Anilox Coating Rollers</option>
+                          <option>General Inquiry</option>
+                        </select>
                     </div>
 
                     <div>
