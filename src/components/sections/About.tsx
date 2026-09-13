@@ -50,7 +50,7 @@ export default function About() {
             </h2>
             <p className="text-[#4B5563] text-lg mb-6 leading-relaxed font-light">
               For over two decades, we have been at the forefront of rotogravure cylinder manufacturing.
-              Combining state-of-the-art TRUMPF laser technology with unparalleled engineering expertise,
+              Combining state-of-the-art TRUMPF diamond tool systems with unparalleled engineering expertise,
               we deliver cylinders that redefine print quality and durability.
             </p>
             <p className="text-[#4B5563] mb-10 leading-relaxed font-light">

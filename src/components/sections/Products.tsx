@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import packagingCylindersImg from "@/assets/packaging-cylinders.jpg";
-import wovenSackCylindersImg from "@/assets/woven-sack-cylinders.png";
-import shrinkSleeveCylindersImg from "@/assets/shrink_and_sleev/SS-2.jpg";
-import paperPrintingCylindersImg from "@/assets/paper-printing-cylinders.png";
-import leatherPrintingRollersImg from "@/assets/leather-printing-rollers.png";
-import aniloxCoatingRollersImg from "@/assets/anilox-coating-rollers.jpg";
+import flexiblePackagingImg from "@/assets/3 FLEXIBLE PACKEGING/flexible-packaging-spices.jpg";
+import wovenSackCylindersImg from "@/assets/WOVEN SACK BAG(1)/woven-sack-card.png";
+import shrinkSleeveCylindersImg from "@/assets/shrink_and_sleev/shrink-sleeve-card.png";
+import paperPrintingCylindersImg from "@/assets/paper-printing-card.png";
+import leatherPrintingRollersImg from "@/assets/7 LEATHER/leather-rexin-card.png";
+import aniloxCoatingRollersImg from "@/assets/anilox-coating-card.png";
 
 const products = [
   {
     title: "Flexible Packaging Cylinders",
     desc: "High-precision gravure cylinders for flexible packaging applications including food, FMCG, pharmaceutical and industrial packaging.",
-    img: packagingCylindersImg,
+    img: flexiblePackagingImg,
     tag: "High Precision",
   },
   {
@@ -84,11 +84,7 @@ export default function Products() {
               <img
                 src={product.img}
                 alt={product.title}
-                className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-110 ${
-                  product.title === "Flexible Packaging Cylinders"
-                    ? "object-contain bg-white p-4"
-                    : "object-cover"
-                }`}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
 
               {/* Dark premium blue/black gradient overlay for maximum readability */}

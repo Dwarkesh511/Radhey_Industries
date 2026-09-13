@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 
 // Import Paper Printing and Anilox Coating images
-import paperPrintingCylindersImg from "@/assets/paper-printing-cylinders.png";
+import paperPrintingCylindersImg from "@/assets/paper-printing-card.png";
 import aniloxCoatingRollersImg from "@/assets/anilox-coating-rollers.jpg";
 
 // Import Flexible Packaging images
