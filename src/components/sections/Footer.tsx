@@ -1,6 +1,6 @@
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
-import brandLogo from "@/assets/logo/radhey_logo.png";
+import brandLogo from "@/assets/logo/footer_logo.png";
 import { contactDetails } from "@/lib/contactDetails";
 
 export default function Footer({ hideIndustries = false }: { hideIndustries?: boolean }) {
@@ -47,7 +47,7 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
               <img
                 src={brandLogo}
                 alt="RADHEY Industries"
-                className="h-20 w-auto object-contain brightness-0 invert"
+                className="h-20 w-auto object-contain"
               />
             </div>
             <p className="text-white/60 max-w-xs text-sm leading-relaxed mb-8">

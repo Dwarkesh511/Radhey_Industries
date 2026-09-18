@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import { Eye, Target } from "lucide-react";
 import aboutFacility from "@/assets/about-facility.jpg";
+import vipulbhaiPansuriya from "@/assets/leaders/vipulbhai-pansuriya.jpeg";
+import pragneshSheladiya from "@/assets/leaders/pragnesh-sheladiya.jpeg";
 
 export default function AboutPage() {
   const sectionEntry = {
@@ -92,7 +94,7 @@ export default function AboutPage() {
       {/* Leadership Team */}
       <section className="py-24 gt-bg-primary">
         <div className="container mx-auto px-6">
-          <motion.div {...sectionEntry} className="mb-16">
+          <motion.div {...sectionEntry} className="mb-16 text-center">
             <span className="inline-block py-1 px-3 border border-[#ED3237]/40 rounded-full text-[#ED3237] text-xs font-semibold uppercase tracking-[0.2em] mb-6 bg-[#ED3237]/10 backdrop-blur-sm">
               Our Leadership
             </span>
@@ -101,14 +103,19 @@ export default function AboutPage() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
-              { name: "Rajan Mehta", title: "Founder & CEO", desc: "25+ years in cylinder manufacturing and strategic business expansion." },
-              { name: "Priya Sharma", title: "Head of Technology", desc: "Expert in laser engraving systems and digital imaging processes." },
-              { name: "Arjun Patel", title: "Export Director", desc: "Managing global client relationships and international logistics." }
+              { name: "Vipul Pansuriya", title: "Founder & CEO", desc: "25+ years in cylinder manufacturing and strategic business expansion.", image: vipulbhaiPansuriya },
+              { name: "Pragnesh Sheladiya", title: "Head of Technology", desc: "Expert in laser engraving systems and digital imaging processes.", image: pragneshSheladiya }
             ].map((leader, i) => (
               <motion.div key={i} {...sectionEntry} className="glass-card p-8 rounded-lg text-center group">
-                <div className="w-32 h-32 mx-auto rounded-full mb-6 bg-gradient-to-tr from-gray-500 to-gray-300 group-hover:from-[#3F3D99] group-hover:to-[#5856C2] transition-all duration-500 shadow-lg" />
+                <div className="w-32 h-32 mx-auto rounded-full mb-6 overflow-hidden bg-gradient-to-tr from-gray-500 to-gray-300 shadow-lg">
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
                 <h3 className="text-2xl font-heading font-bold gt-text-primary mb-1">{leader.name}</h3>
                 <p className="text-[#3F3D99] text-sm font-medium uppercase tracking-wider mb-4">{leader.title}</p>
                 <p className="gt-text-secondary font-light text-sm">{leader.desc}</p>
