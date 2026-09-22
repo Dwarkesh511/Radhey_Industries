@@ -4,6 +4,7 @@ import { Eye, Target } from "lucide-react";
 import aboutFacility from "@/assets/about-facility.jpg";
 import vipulbhaiPansuriya from "@/assets/leaders/vipulbhai-pansuriya.jpeg";
 import pragneshSheladiya from "@/assets/leaders/pragnesh-sheladiya.jpeg";
+import jayeshbhaiPatel from "@/assets/leaders/jayeshbhai-patel.jpeg";
 
 export default function AboutPage() {
   const sectionEntry = {
@@ -103,18 +104,21 @@ export default function AboutPage() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               { name: "Vipul Pansuriya", title: "Founder & CEO", desc: "25+ years in cylinder manufacturing and strategic business expansion.", image: vipulbhaiPansuriya },
-              { name: "Pragnesh Sheladiya", title: "Head of Technology", desc: "Expert in laser engraving systems and digital imaging processes.", image: pragneshSheladiya }
+              { name: "Pragnesh Sheladiya", title: "Head of Technology", desc: "Expert in laser engraving systems and digital imaging processes.", image: pragneshSheladiya },
+              { name: "Jayesh Patel", title: "Export Director", desc: "Managing global client relationships and international logistics.", image: jayeshbhaiPatel }
             ].map((leader, i) => (
               <motion.div key={i} {...sectionEntry} className="glass-card p-8 rounded-lg text-center group">
                 <div className="w-32 h-32 mx-auto rounded-full mb-6 overflow-hidden bg-gradient-to-tr from-gray-500 to-gray-300 shadow-lg">
-                  <img
-                    src={leader.image}
-                    alt={leader.name}
-                    className="w-full h-full object-cover object-center"
-                  />
+                  {leader.image && (
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  )}
                 </div>
                 <h3 className="text-2xl font-heading font-bold gt-text-primary mb-1">{leader.name}</h3>
                 <p className="text-[#3F3D99] text-sm font-medium uppercase tracking-wider mb-4">{leader.title}</p>
