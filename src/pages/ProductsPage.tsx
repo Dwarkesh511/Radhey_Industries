@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
@@ -470,6 +471,28 @@ function ProductImageSlider({ images, productName, className = "" }: ProductImag
 export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState<typeof productsData[0] | null>(null);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    if (productId) {
+      const match = productsData.find(p => p.id === Number(productId));
+      if (match) {
+        setSelectedProduct(match);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProduct]);
+
   const sectionEntry = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -565,147 +588,126 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Technical Excellence Section */}
-      <section className="py-24 gt-bg-primary">
-        <div className="container mx-auto px-6">
-           <motion.div {...sectionEntry} className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-heading font-extrabold gt-text-primary mb-4 tracking-tight">Built to Outperform</h2>
-              <p className="gt-text-secondary font-light max-w-2xl mx-auto">Every cylinder is a masterpiece of metallurgical and mechanical engineering.</p>
-           </motion.div>
-           
-           <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { title: "Material Quality", desc: "Premium forged steel cores overlaid with high-purity electrolytic copper and hard industrial chrome.", spec: "Steel + Cu + Cr" },
-                { title: "Dimensional Tolerance", desc: "Machined and balanced to exact specifications, ensuring perfect register and smooth running.", spec: "±0.001mm" },
-                { title: "Surface Finish", desc: "Polished to a flawless mirror finish, providing optimal ink release and blade wear resistance.", spec: "Ra 0.1μm" }
-              ].map((feature, i) => (
-                <motion.div key={i} {...sectionEntry} className="glass-card p-8 rounded-lg relative overflow-hidden group">
-                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#E8E8F5] rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150" />
-                   <h3 className="text-2xl font-heading font-bold gt-text-primary mb-2">{feature.title}</h3>
-                   <span className="text-[#3F3D99] font-mono text-sm block mb-4">{feature.spec}</span>
-                   <p className="gt-text-secondary font-light">{feature.desc}</p>
-                </motion.div>
-              ))}
-           </div>
-        </div>
-      </section>
-
       {/* Product Detail Modal */}
-      <AnimatePresence>
-        {selectedProduct && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-            onClick={() => setSelectedProduct(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 20 }}
-              className="gt-bg-secondary border rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
-              style={{ borderColor: "var(--gt-border)" }}
-              onClick={e => e.stopPropagation()}
-            >
-               <div className="md:w-2/5 bg-gradient-to-br from-[#2a2a2a] to-[#0a0a0a] border-r relative min-h-[250px]" style={{ borderColor: "var(--gt-border)" }}>
-                 {selectedProduct.images && selectedProduct.images.length > 0 ? (
-                   <ProductImageSlider images={selectedProduct.images} productName={selectedProduct.name} />
-                 ) : (
-                   <>
-                     {selectedProduct.image && (
-                       <img 
-                         src={selectedProduct.image} 
-                         alt={selectedProduct.name} 
-                         className="absolute inset-0 w-full h-full object-contain p-4 object-center" 
-                       />
-                     )}
-                     <div className="absolute inset-0 opacity-30 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.1)_50%,transparent_75%)] bg-[length:200%_200%] animate-[bg-pan_3s_infinite_linear]" />
-                   </>
-                 )}
-                 <div className="absolute bottom-6 left-6 z-20">
-                    <span className="px-3 py-1 bg-[#3F3D99] text-white text-xs font-bold uppercase rounded-md">{selectedProduct.category}</span>
-                 </div>
-               </div>
-               <div className="md:w-3/5 p-8 md:p-10 overflow-y-auto">
-                  <h2 className="text-3xl font-heading font-bold gt-text-primary mb-4">{selectedProduct.name}</h2>
-                  
-                  {selectedProduct.overview ? (
-                    <div className="space-y-6 gt-text-secondary font-light text-sm leading-relaxed mb-8">
-                      <div>
-                        <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Product Overview</h4>
-                        <p>{selectedProduct.overview}</p>
-                      </div>
-                      
-                      {selectedProduct.applications && (
-                        <div>
-                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Applications</h4>
-                          <ul className="list-disc pl-5 space-y-1">
-                            {selectedProduct.applications.map((app, i) => (
-                              <li key={i}>{app}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                      
-                      {selectedProduct.features && (
-                        <div>
-                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Features</h4>
-                          <ul className="list-disc pl-5 space-y-1">
-                            {selectedProduct.features.map((feat, i) => (
-                              <li key={i}>{feat}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {selectedProduct.materials && (
-                        <div>
-                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Materials Supported</h4>
-                          <ul className="list-disc pl-5 space-y-1">
-                            {selectedProduct.materials.map((mat, i) => (
-                              <li key={i}>{mat}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {selectedProduct.advantages && (
-                        <div>
-                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Advantages</h4>
-                          <p>{selectedProduct.advantages}</p>
-                        </div>
-                      )}
-
-                      {selectedProduct.industries && (
-                        <div>
-                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Industries Served</h4>
-                          <p>{selectedProduct.industries}</p>
-                        </div>
-                      )}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {selectedProduct && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm w-screen h-screen overflow-y-auto"
+                onClick={() => setSelectedProduct(null)}
+              >
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  transition={{ type: "spring", damping: 20 }}
+                  className="gt-bg-secondary border rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl flex flex-col md:flex-row max-h-[90vh] my-auto"
+                  style={{ borderColor: "var(--gt-border)" }}
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div className="md:w-2/5 bg-gradient-to-br from-[#2a2a2a] to-[#0a0a0a] border-r relative min-h-[250px]" style={{ borderColor: "var(--gt-border)" }}>
+                    {selectedProduct.images && selectedProduct.images.length > 0 ? (
+                      <ProductImageSlider images={selectedProduct.images} productName={selectedProduct.name} />
+                    ) : (
+                      <>
+                        {selectedProduct.image && (
+                          <img 
+                            src={selectedProduct.image} 
+                            alt={selectedProduct.name} 
+                            className="absolute inset-0 w-full h-full object-contain p-4 object-center" 
+                          />
+                        )}
+                        <div className="absolute inset-0 opacity-30 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.1)_50%,transparent_75%)] bg-[length:200%_200%] animate-[bg-pan_3s_infinite_linear]" />
+                      </>
+                    )}
+                    <div className="absolute bottom-6 left-6 z-20">
+                      <span className="px-3 py-1 bg-[#3F3D99] text-white text-xs font-bold uppercase rounded-md">{selectedProduct.category}</span>
                     </div>
-                  ) : (
-                    <p className="gt-text-secondary font-light leading-relaxed mb-8">{selectedProduct.fullDesc}</p>
-                  )}
-                 
-                 <div className="flex flex-wrap gap-4 pt-6 border-t" style={{ borderColor: "var(--gt-border)" }}>
-                    <a href="/contact" className="px-6 py-3 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.22)] hover:-translate-y-[3px] uppercase tracking-wide text-sm text-center flex-1">
-                      Request Quote
-                    </a>
-                    <button 
-                      onClick={() => setSelectedProduct(null)}
-                      className="px-6 py-3 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors uppercase tracking-wide text-sm flex-1"
-                      style={{ borderColor: "var(--gt-border)" }}
-                    >
-                      Close
-                    </button>
-                 </div>
-               </div>
-            </motion.div>
-          </motion.div>
+                  </div>
+                  <div className="md:w-3/5 p-8 md:p-10 overflow-y-auto">
+                    <h2 className="text-3xl font-heading font-bold gt-text-primary mb-4">{selectedProduct.name}</h2>
+                    
+                    {selectedProduct.overview ? (
+                      <div className="space-y-6 gt-text-secondary font-light text-sm leading-relaxed mb-8">
+                        <div>
+                          <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Product Overview</h4>
+                          <p>{selectedProduct.overview}</p>
+                        </div>
+                        
+                        {selectedProduct.applications && (
+                          <div>
+                            <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Applications</h4>
+                            <ul className="list-disc pl-5 space-y-1">
+                              {selectedProduct.applications.map((app, i) => (
+                                <li key={i}>{app}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {selectedProduct.features && (
+                          <div>
+                            <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Features</h4>
+                            <ul className="list-disc pl-5 space-y-1">
+                              {selectedProduct.features.map((feat, i) => (
+                                <li key={i}>{feat}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {selectedProduct.materials && (
+                          <div>
+                            <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Materials Supported</h4>
+                            <ul className="list-disc pl-5 space-y-1">
+                              {selectedProduct.materials.map((mat, i) => (
+                                <li key={i}>{mat}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {selectedProduct.advantages && (
+                          <div>
+                            <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Advantages</h4>
+                            <p>{selectedProduct.advantages}</p>
+                          </div>
+                        )}
+
+                        {selectedProduct.industries && (
+                          <div>
+                            <h4 className="text-sm font-bold gt-text-primary uppercase tracking-wider mb-2">Industries Served</h4>
+                            <p>{selectedProduct.industries}</p>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="gt-text-secondary font-light leading-relaxed mb-8">{selectedProduct.fullDesc}</p>
+                    )}
+                    
+                    <div className="flex flex-wrap gap-4 pt-6 border-t" style={{ borderColor: "var(--gt-border)" }}>
+                      <a href="/contact" className="px-6 py-3 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.22)] hover:-translate-y-[3px] uppercase tracking-wide text-sm text-center flex-1">
+                        Request Quote
+                      </a>
+                      <button 
+                        onClick={() => setSelectedProduct(null)}
+                        className="px-6 py-3 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors uppercase tracking-wide text-sm flex-1"
+                        style={{ borderColor: "var(--gt-border)" }}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
 
     </PageLayout>
   );

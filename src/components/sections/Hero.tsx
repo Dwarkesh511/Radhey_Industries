@@ -54,8 +54,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.35 }}
             className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl font-light leading-relaxed"
           >
-            High-performance rotogravure cylinder manufacturing solutions engineered for packaging,
-            décor, coating, and printing industries worldwide.
+            High-performance rotogravure cylinder manufacturing solutions engineered for packaging
+            , coating, and printing industries worldwide.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -72,12 +72,7 @@ export default function Hero() {
               Get a Quote
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-            <a
-              href="#technology"
-              className="px-6 py-3 bg-[#ED3237] text-white rounded-md font-semibold text-sm hover:bg-[#C62828] transition-all duration-300 shadow-[0_4px_14px_rgba(237,50,55,0.30)] hover:shadow-[0_6px_20px_rgba(237,50,55,0.40)] hover:-translate-y-[3px] uppercase tracking-wide inline-block"
-            >
-              Explore Technology
-            </a>
+            
           </motion.div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
-import { Search, Activity, Scan, Ruler } from "lucide-react";
+import BuiltToOutperform from "@/components/sections/BuiltToOutperform";
 
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -133,36 +133,8 @@ export default function QualityPage() {
          </div>
       </section>
 
-      {/* Laboratory & Equipment */}
-      <section className="py-24 gt-bg-secondary">
-        <div className="container mx-auto px-6">
-           <motion.div {...sectionEntry} className="mb-16">
-             <span className="inline-block py-1 px-3 border border-[#ED3237]/40 rounded-full text-[#ED3237] text-xs font-semibold uppercase tracking-[0.2em] mb-6 bg-[#ED3237]/10 backdrop-blur-sm">
-                Advanced Facilities
-              </span>
-              <h2 className="text-4xl font-heading font-extrabold gt-text-primary mb-6">Metrology Laboratory</h2>
-           </motion.div>
-
-           <div className="grid md:grid-cols-2 gap-6">
-             {[
-               { icon: Activity, name: "Profilometer", desc: "Measures surface roughness down to Ra 0.01μm ensuring optimal ink release capabilities." },
-               { icon: Scan, name: "CMM Machine", desc: "Coordinate Measuring Machine verifies dimensional geometry and perfect concentricity." },
-               { icon: Search, name: "Optical Comparator", desc: "High-resolution visual inspection system for microscopic cell structure verification." },
-               { icon: Ruler, name: "Thickness Tester", desc: "Eddy-current based precise measurement of copper and chrome plating layers." }
-             ].map((equip, i) => (
-               <motion.div key={i} {...sectionEntry} className="glass-card p-8 rounded-lg flex gap-6 group hover:border-[#ED3237]/30 transition-colors">
-                  <div className="w-16 h-16 rounded-full bg-[#E8E8F5] flex items-center justify-center flex-shrink-0 group-hover:bg-[#3F3D99] transition-colors">
-                     <equip.icon className="w-8 h-8 text-[#3F3D99] group-hover:text-white transition-colors" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-heading font-bold gt-text-primary mb-2">{equip.name}</h3>
-                    <p className="gt-text-secondary font-light text-sm">{equip.desc}</p>
-                  </div>
-               </motion.div>
-             ))}
-           </div>
-        </div>
-      </section>
+      {/* Technical Excellence Section */}
+      <BuiltToOutperform />
 
       {/* Comparison */}
       <section className="py-24 gt-bg-primary">

@@ -181,11 +181,7 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
           <p className="text-white/40 text-xs">
             © {new Date().getFullYear()} RADHEY Industries. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-white/40 hover:text-[#ED3237] text-xs transition-colors">Privacy Policy</a>
-            <a href="#" className="text-white/40 hover:text-[#ED3237] text-xs transition-colors">Terms</a>
-            <a href="#" className="text-white/40 hover:text-[#ED3237] text-xs transition-colors">ISO Certificates</a>
-          </div>
+          
         </div>
       </div>
     </footer>
