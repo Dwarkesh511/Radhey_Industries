@@ -107,7 +107,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { name: "Vipul Pansuriya", title: "Founder & CEO", desc: "25+ years in cylinder manufacturing and strategic business expansion.", image: vipulbhaiPansuriya },
-              { name: "Pragnesh Sheladiya", title: "Head of Technology", desc: "Expert in laser engraving systems and digital imaging processes.", image: pragneshSheladiya },
+              { name: "Pragnesh Sheladiya", title: "Head of Technology", desc: "Expert in diamond tool systems and digital imaging processes.", image: pragneshSheladiya },
               { name: "Jayesh Patel", title: "Export Director", desc: "Managing global client relationships and international logistics.", image: jayeshbhaiPatel }
             ].map((leader, i) => (
               <motion.div key={i} {...sectionEntry} className="glass-card p-8 rounded-lg text-center group">
