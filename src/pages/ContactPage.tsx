@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import LocationMap from "@/components/LocationMap";
@@ -14,6 +14,66 @@ export default function ContactPage() {
   };
 
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [fullName, setFullName] = useState("");
+  const [company, setCompany] = useState("");
+  const [formEmail, setFormEmail] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("email") || "";
+    }
+    return "";
+  });
+  const [phone, setPhone] = useState("");
+  const [requirementType, setRequirementType] = useState("Flexible Packaging Cylinders");
+  const [messageDetails, setMessageDetails] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const message = `Hello RADHEY Industries,
+
+I would like to request a quotation.
+
+Customer Details:
+Full Name: ${fullName}
+Company: ${company}
+Email: ${formEmail}
+Phone: ${phone}
+
+Requirement:
+${requirementType}
+
+Message:
+${messageDetails}
+
+Please provide me with the quotation and further details.
+
+Thank you.`;
+
+    window.open(
+      `https://wa.me/919274519006?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const emailParam = params.get("email");
+    if (emailParam) {
+      setFormEmail(emailParam);
+    }
+    if (window.location.hash === "#quote-form" || window.location.hash === "#contact-form" || emailParam) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById("quote-form");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   const faqs = [
     { q: "What is the minimum order quantity?", a: "We accept orders starting from a single cylinder. Our flexible manufacturing setup allows us to cater to both prototyping needs and large-scale bulk orders efficiently." },
@@ -55,165 +115,213 @@ export default function ContactPage() {
       {/* Info Cards */}
       <section className="py-12 gt-bg-secondary -mt-12 relative z-20">
         <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { icon: Phone, label: "Phone", value: contactPhones },
-                { icon: Mail, label: "Email", value: contactDetails.emails[0] },
-                { icon: MapPin, label: "Address", value: contactAddress },
-                { icon: Globe, label: "Design Studio", value: contactDetails.emails[1] }
-              ].map((info, i) => (
-                <motion.div key={i} {...sectionEntry} className="glass-card p-6 rounded-lg flex items-center gap-4 group hover:border-[#ED3237]/35 transition-colors">
-                   <div className="w-12 h-12 rounded-full border border-[rgba(63,61,153,0.22)] flex items-center justify-center bg-[#E8E8F5] group-hover:bg-[#3F3D99] transition-colors shadow-[0_8px_24px_rgba(63,61,153,0.12)] shrink-0">
-                      <info.icon className="w-5 h-5 text-[#3F3D99] group-hover:text-white transition-colors" />
-                   </div>
-                   <div className="min-w-0 flex-1">
-                      <p className="gt-text-secondary text-xs uppercase tracking-wider mb-1">{info.label}</p>
-                      <p className="gt-text-primary font-medium text-xs sm:text-sm break-words leading-snug">{info.value}</p>
-                   </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Phone, label: "Phone", value: contactPhones },
+              { icon: Mail, label: "Email", value: contactDetails.emails[0] },
+              { icon: MapPin, label: "Address", value: contactAddress },
+              { icon: Globe, label: "Design Studio", value: contactDetails.emails[1] }
+            ].map((info, i) => (
+              <motion.div key={i} {...sectionEntry} className="glass-card p-6 rounded-lg flex items-center gap-4 group hover:border-[#ED3237]/35 transition-colors">
+                <div className="w-12 h-12 rounded-full border border-[rgba(63,61,153,0.22)] flex items-center justify-center bg-[#E8E8F5] group-hover:bg-[#3F3D99] transition-colors shadow-[0_8px_24px_rgba(63,61,153,0.12)] shrink-0">
+                  <info.icon className="w-5 h-5 text-[#3F3D99] group-hover:text-white transition-colors" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="gt-text-secondary text-xs uppercase tracking-wider mb-1">{info.label}</p>
+                  <p className="gt-text-primary font-medium text-xs sm:text-sm break-words leading-snug">{info.value}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Form + Map */}
-      <section className="py-24 gt-bg-primary">
+      <section id="quote-form" className="py-24 gt-bg-primary scroll-mt-24">
         <div className="container mx-auto px-6">
-           <div className="grid lg:grid-cols-2 gap-12">
-              <motion.div {...sectionEntry} className="glass-card p-8 md:p-10 rounded-xl">
-                 <h2 className="text-3xl font-heading font-bold gt-text-primary mb-2">Request a Quote</h2>
-                 <p className="gt-text-secondary font-light mb-8">Fill out the form below and our technical sales team will get back to you within 24 hours.</p>
-                 
-                 <form className="space-y-6" onSubmit={e => e.preventDefault()}>
-                    <div className="grid md:grid-cols-2 gap-6">
-                       <div>
-                         <label className="block text-sm font-medium gt-text-secondary mb-2">Full Name</label>
-                         <input type="text" placeholder="John Doe" className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" />
-                       </div>
-                       <div>
-                         <label className="block text-sm font-medium gt-text-secondary mb-2">Company</label>
-                         <input type="text" placeholder="Acme Print Ltd." className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" />
-                       </div>
-                       <div>
-                         <label className="block text-sm font-medium gt-text-secondary mb-2">Email Address</label>
-                         <input type="email" placeholder="john@example.com" className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" />
-                       </div>
-                       <div>
-                         <label className="block text-sm font-medium gt-text-secondary mb-2">Phone Number</label>
-                         <input type="tel" placeholder="+1 (555) 000-0000" className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" />
-                       </div>
-                    </div>
-                    
-                    <div>
-                       <label className="block text-sm font-medium gt-text-secondary mb-2">Requirement Type</label>
-                        <select className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors appearance-none cursor-pointer">
-                          <option>Flexible Packaging Cylinders</option>
-                          <option>Woven Sack Bag Cylinders</option>
-                          <option>Shrink Sleeve Printing Cylinders</option>
-                          <option>Paper Printing Cylinders</option>
-                          <option>Leather & Rexin Printing Cylinders</option>
-                          <option>Anilox Coating Rollers</option>
-                          <option>General Inquiry</option>
-                        </select>
-                    </div>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <motion.div {...sectionEntry} className="glass-card p-8 md:p-10 rounded-xl">
+              <h2 className="text-3xl font-heading font-bold gt-text-primary mb-2">Request a Quote</h2>
+              <p className="gt-text-secondary font-light mb-8">Fill out the form below and our technical sales team will get back to you within 24 hours.</p>
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium gt-text-secondary mb-2">Full Name</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={fullName}
+                      onChange={e => setFullName(e.target.value)}
+                      placeholder="John Doe" 
+                      className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium gt-text-secondary mb-2">Company</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={company}
+                      onChange={e => setCompany(e.target.value)}
+                      placeholder="Acme Print Ltd." 
+                      className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium gt-text-secondary mb-2">Email Address</label>
+                    <input 
+                      id="quote-form-email"
+                      type="email" 
+                      required
+                      value={formEmail}
+                      onChange={e => setFormEmail(e.target.value)}
+                      placeholder="john@example.com" 
+                      className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium gt-text-secondary mb-2">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      required
+                      value={phone}
+                      onChange={e => setPhone(e.target.value)}
+                      placeholder="+911234567890" 
+                      className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors" 
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium gt-text-secondary mb-2">Requirement Type</label>
+                  <select 
+                    value={requirementType}
+                    onChange={e => setRequirementType(e.target.value)}
+                    className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors appearance-none cursor-pointer"
+                  >
+                    <option>Flexible Packaging Cylinders</option>
+                    <option>Woven Sack Bag Cylinders</option>
+                    <option>Shrink Sleeve Printing Cylinders</option>
+                    <option>Paper Printing Cylinders</option>
+                    <option>Leather & Rexin Printing Cylinders</option>
+                    <option>Anilox Coating Rollers</option>
+                    <option>General Inquiry</option>
+                  </select>
+                </div>
 
-                    <div>
-                       <label className="block text-sm font-medium gt-text-secondary mb-2">Message Details</label>
-                       <textarea rows={4} placeholder="Please provide dimensions, quantity, or specific application requirements..." className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors resize-none"></textarea>
-                    </div>
+                <div>
+                  <label className="block text-sm font-medium gt-text-secondary mb-2">Message Details</label>
+                  <textarea 
+                    rows={4} 
+                    required
+                    value={messageDetails}
+                    onChange={e => setMessageDetails(e.target.value)}
+                    placeholder="Please provide dimensions, quantity, or specific application requirements..." 
+                    className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors resize-none"
+                  ></textarea>
+                </div>
 
-                    <button className="w-full py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.25)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.32)] hover:-translate-y-[3px] uppercase tracking-wide text-sm flex items-center justify-center gap-2 group">
-                      Submit Request
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                 </form>
-              </motion.div>
+                <button 
+                  type="submit" 
+                  className="w-full py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.25)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.32)] hover:-translate-y-[3px] uppercase tracking-wide text-sm flex items-center justify-center gap-2 group"
+                >
+                  Submit Request
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </form>
+            </motion.div>
 
-              <motion.div {...sectionEntry} className="h-full min-h-[500px] md:min-h-[600px] glass-card rounded-xl relative overflow-hidden">
-                 <LocationMap />
-                 <div className="absolute inset-x-0 bottom-0 bg-white/95 backdrop-blur-md border-t border-[#E5E7EB] p-6 sm:p-8 z-10">
-                   <p className="text-xs uppercase tracking-[0.3em] text-[#3F3D99] mb-2">Our Location</p>
-                   <h3 className="text-2xl font-heading font-bold gt-text-primary mb-3">RADHEY Industries</h3>
-                   <address className="not-italic gt-text-secondary text-sm leading-relaxed mb-5 max-w-lg">
-                     1-309/1, Opp. Meghmani Organic,<br />
-                     Nr. Shree Ram Weigh Bridge, Phase II,<br />
-                     G.I.D.C., Vatva, Ahmedabad - 382445,<br />
-                     Gujarat, India
-                   </address>
-                   <a
-                     href="https://maps.google.com/?q=1-309/1,+Opp.+Meghmani+Organic,+Vatva,+Ahmedabad"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="inline-flex items-center justify-center px-6 py-3 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.20)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.28)] uppercase tracking-wide text-sm"
-                   >
-                     Get Directions
-                   </a>
-                 </div>
-              </motion.div>
-           </div>
+            <motion.div {...sectionEntry} className="h-full min-h-[500px] md:min-h-[600px] glass-card rounded-xl relative overflow-hidden">
+              <LocationMap />
+              <div className="absolute inset-x-0 bottom-0 bg-white/95 backdrop-blur-md border-t border-[#E5E7EB] p-6 sm:p-8 z-10">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#3F3D99] mb-2">Our Location</p>
+                <h3 className="text-2xl font-heading font-bold gt-text-primary mb-3">RADHEY Industries</h3>
+                <address className="not-italic gt-text-secondary text-sm leading-relaxed mb-5 max-w-lg">
+                  1-309/1, Opp. Meghmani Organic,<br />
+                  Nr. Shree Ram Weigh Bridge, Phase II,<br />
+                  G.I.D.C., Vatva, Ahmedabad - 382445,<br />
+                  Gujarat, India
+                </address>
+                <a
+                  href="https://maps.app.goo.gl/WCi6hLm78f9PJYUw6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.20)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.28)] uppercase tracking-wide text-sm"
+                >
+                  Get Directions
+                </a>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Factory Visit CTA */}
       <section className="py-24 gt-bg-secondary relative overflow-hidden text-center">
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#3F3D99] rounded-full mix-blend-screen filter blur-[150px] animate-pulse" style={{ opacity: "var(--gt-orb-opacity)" }} />
-         <div className="container mx-auto px-6 relative z-10">
-            <h2 className="text-4xl font-heading font-bold gt-text-primary mb-6">Visit Our Manufacturing Facility</h2>
-            <p className="gt-text-secondary font-light max-w-2xl mx-auto mb-10 text-lg">
-              Seeing is believing. We welcome our clients to tour our 100,000 sq ft facility to witness our precision engineering processes firsthand.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-               <button className="px-8 py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.20)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.28)] hover:-translate-y-[3px] uppercase tracking-wide text-sm">
-                 Schedule a Visit
-               </button>
-                <button 
-                  onClick={() => window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer")}
-                  className="px-8 py-4 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors backdrop-blur-sm uppercase tracking-wide text-sm"
-                  style={{ borderColor: "var(--gt-border)" }}
-                >
-                  Download Brochure
-                </button>
-            </div>
-         </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#3F3D99] rounded-full mix-blend-screen filter blur-[150px] animate-pulse" style={{ opacity: "var(--gt-orb-opacity)" }} />
+        <div className="container mx-auto px-6 relative z-10">
+          <h2 className="text-4xl font-heading font-bold gt-text-primary mb-6">Visit Our Manufacturing Facility</h2>
+          <p className="gt-text-secondary font-light max-w-2xl mx-auto mb-10 text-lg">
+            Seeing is believing. We welcome our clients to tour our 100,000 sq ft facility to witness our precision engineering processes firsthand.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button 
+              onClick={() => {
+                document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-8 py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.20)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.28)] hover:-translate-y-[3px] uppercase tracking-wide text-sm"
+            >
+              Schedule a Visit
+            </button>
+            <button 
+              onClick={() => window.open("/assets/brochure/radhey-brochure.pdf", "_blank", "noopener,noreferrer")}
+              className="px-8 py-4 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors backdrop-blur-sm uppercase tracking-wide text-sm"
+              style={{ borderColor: "var(--gt-border)" }}
+            >
+              Download Brochure
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* FAQ */}
       <section className="py-24 gt-bg-primary">
         <div className="container mx-auto px-6">
-           <motion.div {...sectionEntry} className="text-center mb-16">
-              <span className="inline-block py-1 px-3 border border-[#ED3237]/40 rounded-full text-[#ED3237] text-xs font-semibold uppercase tracking-[0.2em] mb-6 bg-[#ED3237]/10 backdrop-blur-sm">
-                Common Questions
-              </span>
-              <h2 className="text-4xl font-heading font-extrabold gt-text-primary mb-6 tracking-tight">Frequently Asked Questions</h2>
-           </motion.div>
+          <motion.div {...sectionEntry} className="text-center mb-16">
+            <span className="inline-block py-1 px-3 border border-[#ED3237]/40 rounded-full text-[#ED3237] text-xs font-semibold uppercase tracking-[0.2em] mb-6 bg-[#ED3237]/10 backdrop-blur-sm">
+              Common Questions
+            </span>
+            <h2 className="text-4xl font-heading font-extrabold gt-text-primary mb-6 tracking-tight">Frequently Asked Questions</h2>
+          </motion.div>
 
-           <div className="max-w-3xl mx-auto space-y-4">
-              {faqs.map((faq, idx) => (
-                <motion.div key={idx} {...sectionEntry} className="glass-card rounded-lg overflow-hidden border" style={{ borderColor: "var(--gt-border)" }}>
-                   <button 
-                     className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
-                     onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                   >
-                     <span className="font-heading font-bold gt-text-primary pr-4">{faq.q}</span>
-                     <ChevronDown className={`w-5 h-5 text-[#3F3D99] transition-transform duration-300 flex-shrink-0 ${openFaq === idx ? 'rotate-180' : ''}`} />
-                   </button>
-                   <AnimatePresence>
-                     {openFaq === idx && (
-                       <motion.div
-                         initial={{ height: 0, opacity: 0 }}
-                         animate={{ height: "auto", opacity: 1 }}
-                         exit={{ height: 0, opacity: 0 }}
-                         transition={{ duration: 0.3 }}
-                       >
-                         <div className="px-6 pb-5 gt-text-secondary font-light leading-relaxed border-t pt-4" style={{ borderColor: "var(--gt-border)" }}>
-                           {faq.a}
-                         </div>
-                       </motion.div>
-                     )}
-                   </AnimatePresence>
-                </motion.div>
-              ))}
-           </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq, idx) => (
+              <motion.div key={idx} {...sectionEntry} className="glass-card rounded-lg overflow-hidden border" style={{ borderColor: "var(--gt-border)" }}>
+                <button 
+                  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                >
+                  <span className="font-heading font-bold gt-text-primary pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-[#3F3D99] transition-transform duration-300 flex-shrink-0 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {openFaq === idx && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="px-6 pb-5 gt-text-secondary font-light leading-relaxed border-t pt-4" style={{ borderColor: "var(--gt-border)" }}>
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Loader from "@/components/Loader";
 import ScrollToTop from "@/components/ScrollToTop";
+import { MessageCircle } from "lucide-react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import AboutPage from "@/pages/AboutPage";
@@ -23,7 +24,14 @@ const pageVariants: Variants = {
 function AnimatedRoutes() {
   const [location] = useLocation();
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence
+      mode="wait"
+      onExitComplete={() => {
+        if (!window.location.hash) {
+          window.scrollTo(0, 0);
+        }
+      }}
+    >
       <motion.div key={location} variants={pageVariants} initial="initial" animate="enter" exit="exit">
         <Switch>
           <Route path="/" component={Home} />
@@ -46,6 +54,16 @@ function App() {
           <ScrollToTop />
           <Loader />
           <AnimatedRoutes />
+          {/* Floating WhatsApp Button */}
+          <a
+            href="https://wa.me/919274519006"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-4 right-4 md:bottom-5 md:right-5 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-[9999]"
+            aria-label="Contact on WhatsApp"
+          >
+            <MessageCircle className="w-7 h-7" />
+          </a>
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

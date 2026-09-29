@@ -1,9 +1,36 @@
+import { useState } from "react";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import brandLogo from "@/assets/logo/footer_logo.png";
 import { contactDetails } from "@/lib/contactDetails";
 
 export default function Footer({ hideIndustries = false }: { hideIndustries?: boolean }) {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [, setLocation] = useLocation();
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formElement = document.getElementById("quote-form");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth" });
+      if (window.location.pathname === "/contact") {
+        window.history.replaceState(null, "", "#quote-form");
+      }
+      if (newsletterEmail) {
+        const contactEmailInput = document.getElementById("quote-form-email") as HTMLInputElement | null;
+        if (contactEmailInput) {
+          contactEmailInput.value = newsletterEmail;
+          contactEmailInput.dispatchEvent(new Event("input", { bubbles: true }));
+          contactEmailInput.focus();
+        }
+      }
+    } else {
+      const targetUrl = newsletterEmail
+        ? `/contact?email=${encodeURIComponent(newsletterEmail)}#quote-form`
+        : `/contact#quote-form`;
+      setLocation(targetUrl);
+    }
+  };
   return (
     <footer className="bg-[#1E1E4F]">
       {/* Top CTA Band */}
@@ -19,7 +46,17 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
           </div>
           <div className="flex gap-4">
             <Link
-              href="/contact"
+              href="/contact#quote-form"
+              onClick={(e) => {
+                const formEl = document.getElementById("quote-form");
+                if (formEl) {
+                  e.preventDefault();
+                  formEl.scrollIntoView({ behavior: "smooth" });
+                  if (window.location.pathname === "/contact") {
+                    window.history.replaceState(null, "", "#quote-form");
+                  }
+                }
+              }}
               className="px-7 py-3.5 bg-[#ED3237] text-white rounded-lg font-semibold text-sm uppercase tracking-wide
                          hover:bg-[#C62828] transition-all duration-300 shadow-[0_4px_20px_rgba(237,50,55,0.35)]
                          hover:shadow-[0_6px_28px_rgba(237,50,55,0.45)] hover:-translate-y-[3px] inline-flex items-center gap-2"
@@ -60,15 +97,19 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
             <h5 className="text-white font-bold uppercase tracking-wider text-xs mb-6">Products</h5>
             <ul className="space-y-3">
               {[
-                { name: "Flexible Packaging Cylinders", path: "/products" },
-                { name: "Woven Sack Bag Cylinders", path: "/products" },
-                { name: "Shrink Sleeve Printing Cylinders", path: "/products" },
-                { name: "Paper Printing Cylinders", path: "/products" },
-                { name: "Leather & Rexin Printing Cylinders", path: "/products" },
-                { name: "Anilox Coating Rollers", path: "/products" },
+                { name: "Flexible Packaging Cylinders", path: "/products?id=1" },
+                { name: "Woven Sack Bag Cylinders", path: "/products?id=2" },
+                { name: "Shrink Sleeve Printing Cylinders", path: "/products?id=3" },
+                { name: "Paper Printing Cylinders", path: "/products?id=4" },
+                { name: "Leather & Rexin Printing Cylinders", path: "/products?id=5" },
+                { name: "Anilox Coating Rollers", path: "/products?id=6" },
               ].map((item, i) => (
                 <li key={i}>
-                  <Link href={item.path} className="footer-link hover:text-[#ED3237] hover:translate-x-1 inline-block transition-all duration-200">
+                  <Link
+                    href={item.path}
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="footer-link hover:text-[#ED3237] hover:translate-x-1 inline-block transition-all duration-200"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -80,9 +121,33 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
           <div>
             <h5 className="text-white font-bold uppercase tracking-wider text-xs mb-6">Company</h5>
             <ul className="space-y-3">
-              <li><Link href="/about" className="footer-link hover:text-[#ED3237]">About Us</Link></li>
-              <li><Link href="/products" className="footer-link hover:text-[#ED3237]">Products</Link></li>
-              <li><Link href="/quality" className="footer-link hover:text-[#ED3237]">Quality</Link></li>
+              <li>
+                <Link
+                  href="/about"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="footer-link hover:text-[#ED3237]"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/products"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="footer-link hover:text-[#ED3237]"
+                >
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/quality"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="footer-link hover:text-[#ED3237]"
+                >
+                  Quality
+                </Link>
+              </li>
               <li>
                 <a
                   href="/assets/brochure/radhey-brochure.pdf"
@@ -95,7 +160,15 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
                   Portfolio
                 </a>
               </li>
-              <li><Link href="/contact" className="footer-link hover:text-[#ED3237]">Contact</Link></li>
+              <li>
+                <Link
+                  href="/contact"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="footer-link hover:text-[#ED3237]"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -138,17 +211,24 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
               </div>
             </div>
             <p className="text-white/40 text-xs uppercase tracking-wider mb-3 font-semibold">Newsletter</p>
-            <div className="flex gap-2">
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
               <input
                 type="email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                required
                 className="bg-white/8 border border-white/15 rounded-lg px-3 py-2.5 text-sm flex-1 text-white placeholder:text-white/35
                            focus:outline-none focus:border-[#ED3237]/60 focus:ring-1 focus:ring-[#ED3237]/20 transition-all"
                 placeholder="Your email"
               />
-              <button className="bg-[#ED3237] text-white px-4 py-2.5 rounded-lg hover:bg-[#C62828] transition-all flex items-center justify-center shadow-md">
+              <button 
+                type="submit"
+                aria-label="Submit Newsletter"
+                className="bg-[#ED3237] text-white px-4 py-2.5 rounded-lg hover:bg-[#C62828] transition-all flex items-center justify-center shadow-md cursor-pointer hover:scale-105 active:scale-95"
+              >
                 <ArrowRight className="w-4 h-4" />
               </button>
-            </div>
+            </form>
           </div>
 
         </div>
@@ -160,16 +240,21 @@ export default function Footer({ hideIndustries = false }: { hideIndustries?: bo
           <div className="container mx-auto px-6 flex items-center gap-3 flex-wrap">
             <span className="text-white/40 text-xs uppercase tracking-wider mr-3 font-semibold">Industries Served:</span>
             {[
-              "Flexible Packaging",
-              "Woven Sack",
-              "Shrink Sleeve",
-              "Paper Printing",
-              "Leather & Rexin",
-              "Anilox / Coating"
+              { name: "Flexible Packaging", id: 1 },
+              { name: "Woven Sack", id: 2 },
+              { name: "Shrink Sleeve", id: 3 },
+              { name: "Paper Printing", id: 4 },
+              { name: "Leather & Rexin", id: 5 },
+              { name: "Anilox / Coating", id: 6 }
             ].map((ind, i) => (
-              <span key={i} className="border border-white/10 text-white/50 text-[11px] px-3 py-1 rounded-full whitespace-nowrap">
-                {ind}
-              </span>
+              <Link
+                key={i}
+                href={`/products?id=${ind.id}`}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="border border-white/10 text-white/50 hover:text-white hover:border-[#ED3237] hover:bg-[#ED3237]/20 text-[11px] px-3 py-1 rounded-full whitespace-nowrap transition-all duration-200 cursor-pointer"
+              >
+                {ind.name}
+              </Link>
             ))}
           </div>
         </div>

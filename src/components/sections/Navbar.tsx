@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { useTheme } from "@/contexts/ThemeContext";
 import brandLogo from "@/assets/logo/radhey_logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +71,9 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md group ${
                   isActive(link.href)
                     ? "text-[#ED3237]"
@@ -91,23 +92,20 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="hidden md:flex items-center justify-center w-10 h-10 rounded-md hover:bg-[#E8E8F5] dark:hover:bg-[#374151] transition-colors"
-          aria-label="Toggle theme"
-        >
-          {theme === "dark" ? (
-            <Sun className="w-5 h-5 text-[#ED3237]" />
-          ) : (
-            <Moon className="w-5 h-5 text-[#3F3D99]" />
-          )}
-        </button>
-
         {/* CTA Button */}
         <div className="hidden md:block">
           <Link
-            href="/contact"
+            href="/contact#quote-form"
+            onClick={(e) => {
+              const formElement = document.getElementById("quote-form");
+              if (formElement) {
+                e.preventDefault();
+                formElement.scrollIntoView({ behavior: "smooth" });
+                if (window.location.pathname === "/contact") {
+                  window.history.replaceState(null, "", "#quote-form");
+                }
+              }
+            }}
             className="px-5 py-2.5 bg-[#ED3237] text-white rounded-md font-semibold text-sm hover:bg-[#C62828] transition-all duration-300 shadow-[0_4px_14px_rgba(237,50,55,0.30)] hover:shadow-[0_6px_20px_rgba(237,50,55,0.40)] hover:-translate-y-[3px] uppercase tracking-wide inline-block"
           >
             Request Quote
@@ -121,15 +119,6 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-
-        {/* Mobile Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="md:hidden text-[#3F3D99] dark:text-[#ED3237] w-10 h-10 flex items-center justify-center rounded-md hover:bg-[#E8E8F5] dark:hover:bg-[#374151] transition-colors"
-          aria-label="Toggle theme"
-        >
-          {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
         </button>
       </div>
 
@@ -161,7 +150,10 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   className={`py-3 text-sm font-medium transition-colors border-b border-[#F1F5F9] last:border-none flex items-center gap-2 ${
                     isActive(link.href)
                       ? "text-[#ED3237]"
@@ -176,8 +168,18 @@ export default function Navbar() {
               )
             ))}
             <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
+              href="/contact#quote-form"
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                const formElement = document.getElementById("quote-form");
+                if (formElement) {
+                  e.preventDefault();
+                  formElement.scrollIntoView({ behavior: "smooth" });
+                  if (window.location.pathname === "/contact") {
+                    window.history.replaceState(null, "", "#quote-form");
+                  }
+                }
+              }}
               className="mt-4 px-6 py-3 bg-[#ED3237] text-white text-center rounded-md font-semibold transition-all duration-300 uppercase tracking-wide text-sm hover:bg-[#C62828] hover:-translate-y-[3px] shadow-[0_4px_14px_rgba(237,50,55,0.25)]"
             >
               Request Quote

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useSearch, useLocation } from "wouter";
 import PageLayout from "@/components/PageLayout";
 
 // Import Paper Printing and Anilox Coating images
@@ -469,18 +470,22 @@ function ProductImageSlider({ images, productName, className = "" }: ProductImag
 
 
 export default function ProductsPage() {
+  const searchString = useSearch();
+  const [, setLocation] = useLocation();
   const [selectedProduct, setSelectedProduct] = useState<typeof productsData[0] | null>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchString || window.location.search);
     const productId = params.get("id");
     if (productId) {
       const match = productsData.find(p => p.id === Number(productId));
       if (match) {
         setSelectedProduct(match);
+        return;
       }
     }
-  }, []);
+    setSelectedProduct(null);
+  }, [searchString]);
 
   useEffect(() => {
     if (selectedProduct) {
@@ -492,6 +497,16 @@ export default function ProductsPage() {
       document.body.style.overflow = "";
     };
   }, [selectedProduct]);
+
+  const handleClose = () => {
+    setSelectedProduct(null);
+    setLocation("/products");
+  };
+
+  const handleOpenProduct = (product: typeof productsData[0]) => {
+    setSelectedProduct(product);
+    setLocation(`/products?id=${product.id}`);
+  };
 
   const sectionEntry = {
     initial: { opacity: 0, y: 30 },
@@ -542,7 +557,7 @@ export default function ProductsPage() {
                   transition={{ duration: 0.4 }}
                   key={product.id}
                   className="glass-card rounded-xl overflow-hidden group hover:border-[#ED3237]/35 hover:scale-[1.02] transition-all cursor-pointer flex flex-col"
-                  onClick={() => setSelectedProduct(product)}
+                  onClick={() => handleOpenProduct(product)}
                 >
                   <div className="h-[200px] w-full bg-gradient-to-br from-[#0B1026] via-[#111827] to-[#1E1E4F] relative overflow-hidden">
                      {product.images && product.images.length > 0 ? (
@@ -598,17 +613,26 @@ export default function ProductsPage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm w-screen h-screen overflow-y-auto"
-                onClick={() => setSelectedProduct(null)}
+                onClick={handleClose}
               >
                 <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ type: "spring", damping: 20 }}
-                  className="gt-bg-secondary border rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl flex flex-col md:flex-row max-h-[90vh] my-auto"
+                  className="gt-bg-secondary border rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl flex flex-col md:flex-row max-h-[90vh] my-auto relative"
                   style={{ borderColor: "var(--gt-border)" }}
                   onClick={e => e.stopPropagation()}
                 >
+                  {/* Close icon button */}
+                  <button
+                    onClick={handleClose}
+                    className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/50 hover:bg-black/80 text-white transition-colors cursor-pointer"
+                    aria-label="Close modal"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+
                   <div className="md:w-2/5 bg-gradient-to-br from-[#2a2a2a] to-[#0a0a0a] border-r relative min-h-[250px]" style={{ borderColor: "var(--gt-border)" }}>
                     {selectedProduct.images && selectedProduct.images.length > 0 ? (
                       <ProductImageSlider images={selectedProduct.images} productName={selectedProduct.name} />
@@ -629,7 +653,7 @@ export default function ProductsPage() {
                     </div>
                   </div>
                   <div className="md:w-3/5 p-8 md:p-10 overflow-y-auto">
-                    <h2 className="text-3xl font-heading font-bold gt-text-primary mb-4">{selectedProduct.name}</h2>
+                    <h2 className="text-3xl font-heading font-bold gt-text-primary mb-4 pr-6">{selectedProduct.name}</h2>
                     
                     {selectedProduct.overview ? (
                       <div className="space-y-6 gt-text-secondary font-light text-sm leading-relaxed mb-8">
@@ -694,8 +718,8 @@ export default function ProductsPage() {
                         Request Quote
                       </a>
                       <button 
-                        onClick={() => setSelectedProduct(null)}
-                        className="px-6 py-3 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors uppercase tracking-wide text-sm flex-1"
+                        onClick={handleClose}
+                        className="px-6 py-3 border gt-text-primary rounded-lg font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors uppercase tracking-wide text-sm flex-1 cursor-pointer"
                         style={{ borderColor: "var(--gt-border)" }}
                       >
                         Close
