@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import PageLayout from "@/components/PageLayout";
 import LocationMap from "@/components/LocationMap";
-import { Phone, Mail, MapPin, Globe, ArrowRight, ChevronDown } from "lucide-react";
+import { Phone, Mail, MapPin, Globe, ArrowRight, ChevronDown, CheckCircle2, AlertCircle } from "lucide-react";
 import { contactAddress, contactDetails, contactPhones } from "@/lib/contactDetails";
+import { emailjsConfig } from "@/lib/emailjsConfig";
 
 export default function ContactPage() {
   const sectionEntry = {
@@ -13,6 +15,7 @@ export default function ContactPage() {
     transition: { duration: 0.8 }
   };
 
+  const formRef = useRef<HTMLFormElement>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [fullName, setFullName] = useState("");
   const [company, setCompany] = useState("");
@@ -27,33 +30,49 @@ export default function ContactPage() {
   const [requirementType, setRequirementType] = useState("Flexible Packaging Cylinders");
   const [messageDetails, setMessageDetails] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatusMessage(null);
 
-    const message = `Hello RADHEY Industries,
+    if (!formRef.current) return;
 
-I would like to request a quotation.
+    setIsSubmitting(true);
 
-Customer Details:
-Full Name: ${fullName}
-Company: ${company}
-Email: ${formEmail}
-Phone: ${phone}
-
-Requirement:
-${requirementType}
-
-Message:
-${messageDetails}
-
-Please provide me with the quotation and further details.
-
-Thank you.`;
-
-    window.open(
-      `https://wa.me/919274519006?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
+    emailjs
+      .sendForm(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        formRef.current,
+        {
+          publicKey: emailjsConfig.publicKey,
+        }
+      )
+      .then(
+        () => {
+          setIsSubmitting(false);
+          setStatusMessage({
+            type: "success",
+            text: "Thank you! Your quotation request has been sent successfully. Our team will get back to you shortly.",
+          });
+          // Reset form fields after success
+          setFullName("");
+          setCompany("");
+          setFormEmail("");
+          setPhone("");
+          setRequirementType("Flexible Packaging Cylinders");
+          setMessageDetails("");
+        },
+        () => {
+          setIsSubmitting(false);
+          setStatusMessage({
+            type: "error",
+            text: "Sorry, your request could not be sent. Please try again or contact us directly.",
+          });
+        }
+      );
   };
 
   useEffect(() => {
@@ -144,12 +163,13 @@ Thank you.`;
               <h2 className="text-3xl font-heading font-bold gt-text-primary mb-2">Request a Quote</h2>
               <p className="gt-text-secondary font-light mb-8">Fill out the form below and our technical sales team will get back to you within 24 hours.</p>
               
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form ref={formRef} className="space-y-6" onSubmit={sendEmail}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium gt-text-secondary mb-2">Full Name</label>
                     <input 
                       type="text" 
+                      name="full_name"
                       required
                       value={fullName}
                       onChange={e => setFullName(e.target.value)}
@@ -161,6 +181,7 @@ Thank you.`;
                     <label className="block text-sm font-medium gt-text-secondary mb-2">Company</label>
                     <input 
                       type="text" 
+                      name="company"
                       required
                       value={company}
                       onChange={e => setCompany(e.target.value)}
@@ -173,6 +194,7 @@ Thank you.`;
                     <input 
                       id="quote-form-email"
                       type="email" 
+                      name="email"
                       required
                       value={formEmail}
                       onChange={e => setFormEmail(e.target.value)}
@@ -184,6 +206,7 @@ Thank you.`;
                     <label className="block text-sm font-medium gt-text-secondary mb-2">Phone Number</label>
                     <input 
                       type="tel" 
+                      name="phone"
                       required
                       value={phone}
                       onChange={e => setPhone(e.target.value)}
@@ -196,6 +219,7 @@ Thank you.`;
                 <div>
                   <label className="block text-sm font-medium gt-text-secondary mb-2">Requirement Type</label>
                   <select 
+                    name="requirement_type"
                     value={requirementType}
                     onChange={e => setRequirementType(e.target.value)}
                     className="gt-input w-full rounded-lg px-4 py-3 border focus:outline-none transition-colors appearance-none cursor-pointer"
@@ -213,6 +237,7 @@ Thank you.`;
                 <div>
                   <label className="block text-sm font-medium gt-text-secondary mb-2">Message Details</label>
                   <textarea 
+                    name="message"
                     rows={4} 
                     required
                     value={messageDetails}
@@ -222,12 +247,36 @@ Thank you.`;
                   ></textarea>
                 </div>
 
+                {statusMessage && (
+                  <div
+                    className={`p-4 rounded-lg text-sm font-medium flex items-center gap-3 transition-all ${
+                      statusMessage.type === "success"
+                        ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300"
+                        : "bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-300"
+                    }`}
+                  >
+                    {statusMessage.type === "success" ? (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
+                    )}
+                    <span>{statusMessage.text}</span>
+                  </div>
+                )}
+
                 <button 
                   type="submit" 
-                  className="w-full py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.25)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.32)] hover:-translate-y-[3px] uppercase tracking-wide text-sm flex items-center justify-center gap-2 group"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-[#ED3237] text-white rounded-lg font-semibold hover:bg-[#C62828] transition-all duration-300 shadow-[0_10px_30px_rgba(237,50,55,0.25)] hover:shadow-[0_14px_40px_rgba(237,50,55,0.32)] hover:-translate-y-[3px] uppercase tracking-wide text-sm flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
-                  Submit Request
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? (
+                    "Sending Request..."
+                  ) : (
+                    <>
+                      Submit Request
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
                 </button>
               </form>
             </motion.div>
